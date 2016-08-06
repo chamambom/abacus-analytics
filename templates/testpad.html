@@ -1,0 +1,34 @@
+@app.route('/')
+@login_required
+def dropdowns():
+    isp_query = db.session.query(Isps)
+    isp_entries = [dict
+                   (isp_id=isp.isp_id, isp_name=isp.isp_name, isp_description=isp.isp_description) for isp in
+                   isp_query]
+
+    services_query = db.session.query(Services)
+    services_entries = [dict
+                        (service_id=service.service_id, service_name=service.service_name,
+                         service_catergory_id=service.service_catergory_id) for service in
+                        services_query]
+
+    ratings_query = db.session.query(Ratings)
+    ratings_entries = [dict
+                       (ratings_id=rating.ratings_id, rating_value=rating.rating_value,
+                        rating_comment=rating.rating_comment) for rating in
+                       ratings_query]
+
+    servicemetric_query = db.session.query(Service_metric)
+    servicemetric_entries = [dict
+                             (metric_id=metric.metric_id, metric_name=metric.metric_name,
+                              metric_description=metric.metric_description) for metric in
+                             servicemetric_query]
+
+    # print servicemetric_entries[0]['metric_name']
+    # print servicemetric_entries[1]['metric_name']
+    # print servicemetric_entries[2]['metric_name']
+    # print servicemetric_entries[3]['metric_name']
+    # print servicemetric_entries[4]['metric_name']
+
+    return render_template('welcome.html', isp_entries=isp_entries, services_entries=services_entries,
+                           ratings_entries=ratings_entries, servicemetric_entries=servicemetric_entries)

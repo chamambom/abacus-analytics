@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <script src ="{{ url_for('static', filename='js/jquery.min-1.12.0.js')}}"></script>
+
+    <script src ="{{ url_for('static', filename='react/react.js')}}"></script>
+    <script src ="{{ url_for('static', filename='react/react-dom.js')}}"></script>
+    <script src ="{{ url_for('static', filename='react/JSXTransformer.js')}}"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+
+    <link rel="stylesheet" media="screen" href = "{{ url_for('static', filename='bootstrap-3.3.6-dist/css/bootstrap.min.css') }}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" media="screen" href = "{{ url_for('static', filename='css/custom.css') }}">
+    <link rel="stylesheet" media="screen" href = "{{ url_for('static', filename='css/signin.css') }}">
+    <link rel="stylesheet" media="screen" href = "{{ url_for('static', filename='css/sticky-footer-navbar.css') }}">
+    <link rel="stylesheet" media="screen" href = "{{ url_for('static', filename='css/ie10-viewport-bug-workaround.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ISP Services Compare</title>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+  /* Note: Try to remove the following lines to see the effect of CSS positioning */
+     .affix {
+      top: 20px;
+        }
+  </style>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Oculus</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{{url_for('home')}}">Home</a></li>
+            <li><a href="{{url_for('react')}}">ReactTest</a></li>
+            <li><a href="{{url_for('welcome')}}">Welcome</a></li>
+            <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                   <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                   </ul>
+                </li>
+            {% if g.user.is_authenticated %}
+							<li><a href="{{ url_for('view_my_ratings') }}">My QOS Ratings</a></li>
+							<li><a href="{{ url_for('logout') }}">Logout</a></li>
+							<li><a href="#">{{g.user.email}}</a></li>
+			{% endif %}
+			{% if not g.user.is_authenticated %}
+							<li><a id="loginLink" href="{{ url_for('login') }}" role="button"><i class="fa fa-lock login"></i><span>Login</span></a></li>
+                            <li><a  href="{{ url_for('register') }}" role="button"><i class="fa fa-pencil register"></i><span>Register</span></a></li>
+			{% endif %}
+
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    {% if g.user.is_authenticated %}
+    <nav class="col-sm-3">
+      <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="205">
+        <li class="active"><a  href="{{ url_for('rate_isp_service') }}" >Share Your QOS Experience</a></li>
+        <li><a  href="{{ url_for('view_my_ratings') }}">My QOS Ratings</a></li>
+        <li><a  href="{{ url_for('build_service_report') }}" >Average QOS Scores</a></li>
+        <li><a  href="{{ url_for('survey') }}" >Take Survey</a></li>
+      </ul>
+    </nav>
+   {% endif %}
+
+ <div class="container">
+
+ <div class="col-sm-9">
+     {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+         <ul class="flashes">
+        {% for category, message in messages %}
+          <li class="alert alert-{{ category }}">
+           <a class="close" data-dismiss="alert">&times;</a>
+          {{ message }}
+          </li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+
+    {% block body %} {% endblock %}
+
+   </div> {#end of col div#}
+
+ </div>{# end container div#}
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">&copy; 2016 Afro Innovations.</p>
+      </div>
+    </footer>
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src ="{{ url_for('static', filename='bootstrap-3.3.6-dist/js/bootstrap.min.js') }}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{{ url_for('static', filename='js/ie10-viewport-bug-workaround.js') }}"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,188 @@
+body {
+    color: #333;
+    font-family: "freight-sans-pro",calibri,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
+}
+.navbar-default {
+    background: #e10019 none repeat scroll 0 0;
+   /* background: rgba(0, 0, 0, 0) url("../img/polygon.jpg") no-repeat scroll center center / cover ;*/
+}
+
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.navbar-header > .navbar-brand {
+    float: left;
+    font-size: 25px;
+}
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+    background-color: #fcfcfc;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+    background-color: #fcfcfc;
+
+}
+
+/*########### below is the tabbed navigation when you loggin ############*/
+.nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+    background-color: #eee ;
+    color: #e10019 ;
+}
+a {
+    color: #999;
+
+}
+
+/*################################ Tabbed Panes  ###################################################*/
+
+.nav-tabs > li, .nav-pills > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+
+}
+
+.nav-tabs, .nav-pills {
+    text-align:match-parent;
+    margin-top: 15px;
+}
+
+
+.tab-content{
+    padding: 20px;
+}
+
+.page-header {
+    border: 1px solid #eee;
+    margin: 4px 0px 4px 0px;
+    padding: 5px;
+    background-color: #fcfcfc;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+     border-radius: 2px;
+}
+
+.btn-default {
+    background-color: #e7e7e7;
+   }
+
+.navbar-header > .navbar-brand {
+    float: left;
+    font-size: 22px;
+}
+.img-circle {
+    border-radius: 3%;
+}
+.container{
+     width: 900px;
+     border-right: 0px solid #e9e9e9;
+     border-left: 0px solid #e9e9e9;
+     border-bottom: 0px solid #e9e9e9;
+     padding-left: 10px;
+     padding-right: 10px;
+     }
+
+.col-sm-9{
+    width:890px;
+    border-top: 0px solid #e9e9e9;
+    border-left: 1px solid #e9e9e9;
+    border-right: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;
+    padding: 5px;
+    margin-bottom:5px;
+    margin-top:0px;
+    margin-left:0px;
+}
+
+.col-sm-3 {
+    width: 17%;
+    top: 40px;
+}
+.panel {
+    margin-bottom: 5px;
+}
+.panel-body {
+    padding: 5px;
+}
+
+.panel-group {
+    margin-bottom: 5px;
+}
+
+.panel-group .panel {
+    border-radius: 2px;
+    margin-bottom: 0;
+}
+
+
+.panel-heading {
+
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    padding: 10px 15px;
+}
+
+.table {
+    margin-bottom:5px;
+    max-width:100%;
+    width:100%;
+
+}
+.h4, h4 ,.nav > li {
+    font-size:16px;
+    color:#ed1c24;
+    font-weight:bold;
+
+}
+.h5, h5 {
+    color: #666;
+    font-weight: bold;
+    font-style:oblique;
+}
+.form-group {
+
+    padding-left: 20px;
+}
+
+.list-group {
+    margin-bottom: 5px;
+   }
+.list-group-item {
+   padding: 5px 15px;
+}
+ol, ul {
+    margin-bottom:2px;
+    margin-top:0;
+}
+.flashes {
+    display:block;
+    list-style: none;
+}
+
+.alert {
+    border-radius:2px;
+    padding:10px;
+    margin-left: -40px;
+    font-style:oblique;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.alert-message{
+    background-color: lightgoldenrodyellow;
+}
+
+b, strong {
+    font-size:18px;
+    color:#ed1c24;
+   }

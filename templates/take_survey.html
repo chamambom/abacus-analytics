@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body %}
+<ul class="list-group">
+    <li class="list-group-item disabled" ><h5>Below is an Optional Random Survey</h5></li>
+ </ul>
+
+ <form action="#" class = "form-custom" method="post">
+ <p>Which ISP(s) are you currently subscribed to right now ? (Not in the past !!)</p>
+
+     <div class="form-group">
+
+           {% for isp in isp_entries %}
+           <div class="checkbox">
+                  <input type="checkbox" id="isp_id" name="{{ isp.isp_name }}">{{ isp.isp_name }}
+           </div>
+           {% else %}
+              <li><em>No entries here so far</em></li>
+           {% endfor %}
+      </div>
+</form>
+{% endblock %}
