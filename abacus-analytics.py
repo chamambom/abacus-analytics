@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, url_for, render_template, flash, g
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from forms import SignupForm
 from sqlalchemy import func
 from utils import *
 
@@ -39,6 +40,12 @@ def survey():
 @app.route('/home')
 def home():
     return render_template('home.html')
+
+
+
+@app.route('/isp_portal')
+def isp_portal():
+    return render_template('isp_portal.html')
 
 
 @app.route('/view_my_ratings', methods=['GET', 'POST'])
@@ -110,6 +117,48 @@ def view_average_isp_ratings():
 @login_required
 def rate_isp_service():
     isp_entries, services_entries, ratings_entries, servicemetric_entries = dropdown()
+    if request.method == 'POST':
+        metric_id = request.form['metric_id']
+        isp_id = request.form['isp_id']
+        service_id = request.form['service_id']
+        ratings_value = request.form['ratings_value']
+        custom_rating_comment = request.form['custom_rating_comment']
+        if not metric_id:
+            flash('KPI is required', 'danger')
+        elif not isp_id:
+            flash('ISP is required', 'danger')
+        elif not service_id:
+            flash('service_name is required', 'danger')
+        elif not ratings_value:
+            flash('ratings_id is required', 'danger')
+        elif not custom_rating_comment:
+            flash('custom_rating_comment is required', 'danger')
+        else:
+            user_service_ratings = Service_metric_ratings(metric_id, isp_id, service_id, ratings_value,
+                                                          custom_rating_comment)
+
+            exists = db.session.query(Service_metric_ratings.user_id, Service_metric_ratings.metric_id, Service_metric_ratings.service_id,
+                                      Service_metric_ratings.isp_id) \
+                .filter(Service_metric_ratings.metric_id == metric_id,
+                        Service_metric_ratings.isp_id == isp_id,
+                        Service_metric_ratings.service_id == service_id) \
+                .filter_by(user_id=g.user.user_id).count()
+
+            if exists:
+                flash('You have already provided ratings for this service , edit it instead', 'danger')
+            else:
+                user_service_ratings.user = g.user
+                db.session.add(user_service_ratings)
+                db.session.commit()
+                flash('Data successfully Added', 'success')
+    return render_template('rate_isp_service.html', isp_entries=isp_entries, services_entries=services_entries,
+                           ratings_entries=ratings_entries, servicemetric_entries=servicemetric_entries)
+
+
+@app.route('/rate_isp_service_multiple', methods=['GET', 'POST'])
+@login_required
+def rate_isp_service_multiple():
+    isp_entries, services_entries, ratings_entries, servicemetric_entries = dropdown()
 
     if request.method == 'POST':
         metric_id = request.form['metric_id']
@@ -145,26 +194,48 @@ def rate_isp_service():
                 db.session.add(user_service_ratings)
                 db.session.commit()
                 flash('Data successfully Added', 'success')
-    return render_template('rate_isp_service.html', isp_entries=isp_entries, services_entries=services_entries,
+    return render_template('rate_isp_service_multiple.html', isp_entries=isp_entries, services_entries=services_entries,
                            ratings_entries=ratings_entries, servicemetric_entries=servicemetric_entries)
+
+
+# @app.route('/register', methods=['GET', 'POST'])
+# def register():
+# if request.method == 'GET':
+# return render_template('register.html')
+# password = request.form['password']
+# email = request.form['email']
+# user = User(password, email)
+# exists = db.session.query(User.user_id).filter_by(email=email).scalar() is not None
+#     if exists:
+#         flash(email + ' is already registered , Login if you remember the password ', 'danger')
+#         return render_template('login.html')
+#     else:
+#         db.session.add(user)
+#         db.session.commit()
+#         flash('User successfully registered', 'success')
+#     return redirect(url_for('login'))
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == 'GET':
-        return render_template('register.html')
-    password = request.form['password']
-    email = request.form['email']
-    user = User(password, email)
-    exists = db.session.query(User.user_id).filter_by(email=email).scalar() is not None
-    if exists:
-        flash(email + ' is already registered , Login if you remember the password ', 'danger')
-        return render_template('login.html')
-    else:
-        db.session.add(user)
-        db.session.commit()
-        flash('User successfully registered', 'success')
-    return redirect(url_for('login'))
+    form = SignupForm()
+    if g.user.is_authenticated:
+        return redirect(url_for('welcome'))
+
+    if request.method == 'POST':
+        if form.validate() == False:
+            return render_template('register.html', form=form)
+        else:
+            newuser = User(form.password.data, form.email.data)
+            db.session.add(newuser)
+            db.session.commit()
+
+            current_user = newuser.email
+            if current_user:
+                return redirect(url_for('welcome'))
+
+    elif request.method == 'GET':
+        return render_template('register.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])

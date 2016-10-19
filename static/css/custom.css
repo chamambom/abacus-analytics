@@ -5,7 +5,7 @@ body {
     line-height: 1.42857;
 }
 .navbar-default {
-    background: #e10019 none repeat scroll 0 0;
+    background: #7D1935 none repeat scroll 0 0;
    /* background: rgba(0, 0, 0, 0) url("../img/polygon.jpg") no-repeat scroll center center / cover ;*/
 }
 
@@ -65,8 +65,8 @@ a {
 .page-header {
     border: 1px solid #eee;
     margin: 4px 0px 4px 0px;
-    padding: 5px;
-    background-color: #fcfcfc;
+    padding: 4px;
+    background-color: #F5F3EE;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
      border-radius: 2px;
@@ -141,7 +141,6 @@ a {
 .h4, h4 ,.nav > li {
     font-size:16px;
     color:#ed1c24;
-    font-weight:bold;
 
 }
 .h5, h5 {
@@ -181,7 +180,9 @@ ol, ul {
 .alert-message{
     background-color: lightgoldenrodyellow;
 }
-
+.test{
+    background-color: red;
+}
 b, strong {
     font-size:18px;
     color:#ed1c24;

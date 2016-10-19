@@ -1,7 +1,6 @@
 from models import User, Isps, Service_metric_ratings, Service_catergory, Service_metric, Services, Ratings
 from database import db
 
-
 def dropdown():
     isp_query = db.session.query(Isps)
     isp_entries = [dict
