@@ -4,19 +4,19 @@ from forms import SignupForm
 from sqlalchemy import func
 from utils import *
 
-app = Flask(__name__)
-app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+application = Flask(__name__)
+application.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 login_manager = LoginManager()
-login_manager.init_app(app)
+login_manager.init_app(application)
 login_manager.login_view = '/login'
 
 
-@app.route('/')
+@application.route('/')
 def index():
     return render_template('home.html')
 
 
-@app.route('/welcome')
+@application.route('/welcome')
 @login_required
 def welcome():
     isp_entries, services_entries, ratings_entries, servicemetric_entries = dropdown()
@@ -24,12 +24,12 @@ def welcome():
                            ratings_entries=ratings_entries, servicemetric_entries=servicemetric_entries)
 
 
-@app.route('/react')
+@application.route('/react')
 def react():
     return render_template('react.html')
 
 
-@app.route('/survey')
+@application.route('/survey')
 @login_required
 def survey():
     isp_entries, services_entries, ratings_entries, servicemetric_entries = dropdown()
@@ -37,18 +37,18 @@ def survey():
                            ratings_entries=ratings_entries, servicemetric_entries=servicemetric_entries)
 
 
-@app.route('/home')
+@application.route('/home')
 def home():
     return render_template('home.html')
 
 
 
-@app.route('/isp_portal')
+@application.route('/isp_portal')
 def isp_portal():
     return render_template('isp_portal.html')
 
 
-@app.route('/view_my_ratings', methods=['GET', 'POST'])
+@application.route('/view_my_ratings', methods=['GET', 'POST'])
 @login_required
 def view_my_ratings():
     # my_service_ratings = Service_metric_ratings.query.filter_by(user_id=g.user.user_id).order_by(
@@ -70,7 +70,7 @@ def view_my_ratings():
     return render_template('view_my_ratings.html', my_service_ratings=my_service_ratings)
 
 
-@app.route('/build_service_report', methods=['GET', 'POST'])
+@application.route('/build_service_report', methods=['GET', 'POST'])
 @login_required
 def build_service_report():
     isp_entries, services_entries, ratings_entries, servicemetric_entries = dropdown()
@@ -78,7 +78,7 @@ def build_service_report():
                            servicemetric_entries=servicemetric_entries)
 
 
-@app.route('/view_average_isp_ratings', methods=['GET', 'POST'])
+@application.route('/view_average_isp_ratings', methods=['GET', 'POST'])
 @login_required
 def view_average_isp_ratings():
     if request.method == 'GET':
@@ -113,7 +113,7 @@ def view_average_isp_ratings():
                                ratings_table_values=ratings_table_values)
 
 
-@app.route('/rate_isp_service', methods=['GET', 'POST'])
+@application.route('/rate_isp_service', methods=['GET', 'POST'])
 @login_required
 def rate_isp_service():
     isp_entries, services_entries, ratings_entries, servicemetric_entries = dropdown()
@@ -155,7 +155,7 @@ def rate_isp_service():
                            ratings_entries=ratings_entries, servicemetric_entries=servicemetric_entries)
 
 
-@app.route('/rate_isp_service_multiple', methods=['GET', 'POST'])
+@application.route('/rate_isp_service_multiple', methods=['GET', 'POST'])
 @login_required
 def rate_isp_service_multiple():
     isp_entries, services_entries, ratings_entries, servicemetric_entries = dropdown()
@@ -216,7 +216,7 @@ def rate_isp_service_multiple():
 #     return redirect(url_for('login'))
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@application.route('/register', methods=['GET', 'POST'])
 def register():
     form = SignupForm()
     if g.user.is_authenticated:
@@ -238,7 +238,7 @@ def register():
         return render_template('register.html', form=form)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@application.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
         return render_template('login.html')
@@ -260,7 +260,7 @@ def login():
     return redirect(request.args.get('next') or url_for('rate_isp_service'))
 
 
-@app.route('/logout')
+@application.route('/logout')
 @login_required
 def logout():
     logout_user()
@@ -276,10 +276,10 @@ def user_loader(email):
     return User.query.get(str(email))
 
 
-@app.before_request
+@application.before_request
 def before_request():
     g.user = current_user
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    application.run(debug=True)
