@@ -1,2 +1,2 @@
-# oculus
-compares services offered by zimbabwean ISPs
+# Abacus Analytics
+Application to compare QOS for services offered by zimbabwean ISPs
