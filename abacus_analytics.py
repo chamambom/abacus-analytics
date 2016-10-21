@@ -5,7 +5,7 @@ from sqlalchemy import func
 from utils import *
 
 application = Flask(__name__)
-application.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+application.secret_key = 'A0Zr98j/3yXR~XHH!jmN]LWX/,?RT'
 login_manager = LoginManager()
 login_manager.init_app(application)
 login_manager.login_view = '/login'
@@ -268,12 +268,15 @@ def logout():
     return redirect(url_for('login'))
 
 
+#!py
 @login_manager.user_loader
-def user_loader(email):
+def user_loader(user_id):
     """Given *user_id*, return the associated User object.
-       :param unicode user_id: user_id (email) user to retrieve
-      """
-    return User.query.get(str(email))
+
+    :param unicode user_id: user_id (email) user to retrieve
+    """
+    return User.query.get(user_id)
+
 
 
 @application.before_request
