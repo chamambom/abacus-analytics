@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import StringField, TextAreaField, SubmitField, validators, ValidationError, PasswordField
+from wtforms import StringField, TextAreaField, SubmitField, validators, PasswordField
 from models import User
 
 
@@ -34,7 +34,7 @@ class SignupForm(Form):
             return True
 
 
-class SigninForm(Form):
+class LoginForm(Form):
     email = StringField("Email", [validators.DataRequired("Please enter your email address."),
                                   validators.Email("Please enter your email address.")])
     password = PasswordField('Password', [validators.DataRequired("Please enter a password.")])
@@ -43,7 +43,7 @@ class SigninForm(Form):
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
 
-    def validate(self):
+    def validate_on_submit(self):
         if not Form.validate(self):
             return False
 
@@ -51,20 +51,5 @@ class SigninForm(Form):
         if user and user.check_password(self.password.data):
             return True
         else:
-            self.email.errors.append("Invalid e-mail or password")
+            self.email.errors.append("Incorrect login credentials")
             return False
-
-# class RateIspService(Form):
-#     metric_id = StringField('Metric Name', [validators.DataRequired("Metric Name is Required.")])
-#     isp_id = StringField('ISP Name', [validators.DataRequired("Please enter ISP Name.")])
-#     service_id = StringField('Service Name', [validators.DataRequired("Please enter Service Name.")])
-#     ratings_value = StringField('Rating', [validators.DataRequired("Please enter Ratings.")])
-#     custom_rating_comment = StringField('Comments', [validators.DataRequired("Please enter Your comments.")])
-#     submit = SubmitField("Share your QOS Score")
-#
-#     def __init__(self, *args, **kwargs):
-#         Form.__init__(self, *args, **kwargs)
-#
-#     def validate(self):
-#         if not Form.validate(self):
-#             return False

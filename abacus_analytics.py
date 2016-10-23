@@ -1,14 +1,14 @@
 from flask import Flask, request, redirect, url_for, render_template, flash, g
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from forms import SignupForm
+from forms import SignupForm, LoginForm
 from sqlalchemy import func
 from utils import *
 
 application = Flask(__name__)
-application.secret_key = 'A0Zr98j/3yXR~XHH!jmN]LWX/,?RT'
+application.secret_key = 'A0Zr98jh/3yXR~XHH!jmN]LWX/,?RT'
 login_manager = LoginManager()
 login_manager.init_app(application)
-login_manager.login_view = '/login'
+login_manager.login_view = 'login'
 
 
 @application.route('/')
@@ -40,7 +40,6 @@ def survey():
 @application.route('/home')
 def home():
     return render_template('home.html')
-
 
 
 @application.route('/isp_portal')
@@ -206,14 +205,16 @@ def rate_isp_service_multiple():
 # email = request.form['email']
 # user = User(password, email)
 # exists = db.session.query(User.user_id).filter_by(email=email).scalar() is not None
-#     if exists:
-#         flash(email + ' is already registered , Login if you remember the password ', 'danger')
-#         return render_template('login.html')
-#     else:
-#         db.session.add(user)
-#         db.session.commit()
-#         flash('User successfully registered', 'success')
-#     return redirect(url_for('login'))
+# if exists:
+# flash(email + ' is already registered , Login if you remember the password ', 'danger')
+# return render_template('login.html')
+# else:
+# db.session.add(user)
+# db.session.commit()
+# flash('User successfully registered', 'success')
+# return redirect(url_for('login'))
+
+
 
 
 @application.route('/register', methods=['GET', 'POST'])
@@ -240,35 +241,34 @@ def register():
 
 @application.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'GET':
-        return render_template('login.html')
-    email = request.form['email']
-    password = request.form['password']
-    remember_me = False
-    if 'remember_me' in request.form:
-        remember_me = True
-    registered_user = User.query.filter_by(email=email).first()
-    if registered_user is None:
-        flash('Your Username and Password dont exist', 'danger')
-        return redirect(url_for('login'))
-    if not registered_user.check_password(password):
-        flash('Password is invalid', 'danger')
-        return redirect(url_for('login'))
-    else:
-        login_user(registered_user, remember=remember_me)
-        # flash('Thank you ' + email + ' for using our site ,we greatly appreciate you sharing your experiences', 'success')
-    return redirect(request.args.get('next') or url_for('rate_isp_service'))
+    form = LoginForm(request.form)
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            user = User.query.filter_by(email=form.email.data).first()
+            print(user)
+            if user is not None and user.check_password(form.password.data):
+                user.authenticated = True
+                login_user(user)
+                print('Thanks for logging in, {}'.format(current_user.email))
+                return redirect(url_for('rate_isp_service'))
+            else:
+                print('ERROR! Incorrect login credentials.', 'error')
+    return render_template('login.html', form=form)
 
 
 @application.route('/logout')
 @login_required
 def logout():
+    """Logout the current user."""
+    user = current_user
+    user.authenticated = False
+    db.session.add(user)
+    db.session.commit()
     logout_user()
     flash('You have logged out ,thank you for your contribution', 'success')
     return redirect(url_for('login'))
 
 
-#!py
 @login_manager.user_loader
 def user_loader(user_id):
     """Given *user_id*, return the associated User object.
@@ -276,7 +276,6 @@ def user_loader(user_id):
     :param unicode user_id: user_id (email) user to retrieve
     """
     return User.query.get(user_id)
-
 
 
 @application.before_request
