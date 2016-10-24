@@ -60,7 +60,7 @@ def view_my_ratings():
         .filter(Service_metric_ratings.service_id == Services.service_id) \
         .filter(Service_metric_ratings.metric_id == Service_metric.metric_id) \
         .filter(Service_metric_ratings.isp_id == Isps.isp_id) \
-        .filter_by(user_id=g.user.user_id) \
+        .filter_by(user_id=current_user.user_id) \
         .order_by(Service_metric_ratings.pub_date.desc()).all()
 
     # for i in my_service_ratings:
@@ -141,12 +141,12 @@ def rate_isp_service():
                 .filter(Service_metric_ratings.metric_id == metric_id,
                         Service_metric_ratings.isp_id == isp_id,
                         Service_metric_ratings.service_id == service_id) \
-                .filter_by(user_id=g.user.user_id).count()
+                .filter_by(user_id=current_user.user_id).count()
 
             if exists:
                 flash('You have already provided ratings for this service , edit it instead', 'danger')
             else:
-                user_service_ratings.user = g.user
+                user_service_ratings.user = current_user
                 db.session.add(user_service_ratings)
                 db.session.commit()
                 flash('Data successfully Added', 'success')
@@ -184,12 +184,12 @@ def rate_isp_service_multiple():
                 .filter(Service_metric_ratings.metric_id == metric_id, \
                         Service_metric_ratings.isp_id == isp_id, \
                         Service_metric_ratings.service_id == service_id) \
-                .filter_by(user_id=g.user.user_id).count()
+                .filter_by(user_id=current_user.user_id).count()
 
             if exists:
                 flash('You have already provided ratings for this service , edit it instead', 'danger')
             else:
-                user_service_ratings.user = g.user
+                user_service_ratings.user = current_user
                 db.session.add(user_service_ratings)
                 db.session.commit()
                 flash('Data successfully Added', 'success')
@@ -220,9 +220,6 @@ def rate_isp_service_multiple():
 @application.route('/register', methods=['GET', 'POST'])
 def register():
     form = SignupForm()
-    if g.user.is_authenticated:
-        return redirect(url_for('welcome'))
-
     if request.method == 'POST':
         if form.validate() == False:
             return render_template('register.html', form=form)
@@ -276,11 +273,6 @@ def user_loader(user_id):
     :param unicode user_id: user_id (email) user to retrieve
     """
     return User.query.get(user_id)
-
-
-@application.before_request
-def before_request():
-    g.user = current_user
 
 
 if __name__ == '__main__':

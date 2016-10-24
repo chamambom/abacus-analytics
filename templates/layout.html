@@ -68,12 +68,12 @@
                         <li><a href="#">One more separated link</a></li>
                    </ul>
                 </li>
-             {% if g.user.is_authenticated %}
+             {% if current_user.is_authenticated %}
 							<li><a href="{{ url_for('view_my_ratings') }}">My Ratings</a></li>
 							<li><a href="{{ url_for('logout') }}">Logout</a></li>
 							<li><a href="#">{{current_user.email}}</a></li>
 			{% endif %}
-			{% if not g.user.is_authenticated %}
+			{% if not current_user.is_authenticated %}
 							<li><a id="loginLink" href="{{ url_for('login') }}" role="button"><i class="fa fa-lock login"></i><span>User Login</span></a></li>
                             <li><a  href="{{ url_for('register') }}" role="button"><i class="fa fa-pencil register"></i><span>Register</span></a></li>
 			{% endif %}
@@ -83,7 +83,7 @@
       </div>
     </nav>
 
-    {% if g.user.is_authenticated %}
+    {% if current_user.is_authenticated %}
     <nav class="col-sm-3">
       <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="205">
         <li class="active"><a  href="{{ url_for('rate_isp_service') }}" >Share QoS Score(Single Service)</a></li>
