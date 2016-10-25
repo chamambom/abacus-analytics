@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, render_template, flash, g
+from flask import Flask, request, redirect, url_for, render_template, flash
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from forms import SignupForm, LoginForm
 from sqlalchemy import func
@@ -8,7 +8,8 @@ application = Flask(__name__)
 application.secret_key = 'A0Zr98jh/3yXR~XHH!jmN]LWX/,?RT'
 login_manager = LoginManager()
 login_manager.init_app(application)
-login_manager.login_view = 'login'
+login_manager.login_view = '/login'
+login_manager.login_message = u"You are not authorised to view this page"
 
 
 @application.route('/')
@@ -214,9 +215,6 @@ def rate_isp_service_multiple():
 # flash('User successfully registered', 'success')
 # return redirect(url_for('login'))
 
-
-
-
 @application.route('/register', methods=['GET', 'POST'])
 def register():
     form = SignupForm()
@@ -259,8 +257,6 @@ def logout():
     """Logout the current user."""
     user = current_user
     user.authenticated = False
-    db.session.add(user)
-    db.session.commit()
     logout_user()
     flash('You have logged out ,thank you for your contribution', 'success')
     return redirect(url_for('login'))
@@ -269,8 +265,7 @@ def logout():
 @login_manager.user_loader
 def user_loader(user_id):
     """Given *user_id*, return the associated User object.
-
-    :param unicode user_id: user_id (email) user to retrieve
+       :param unicode user_id: user_id (email) user to retrieve
     """
     return User.query.get(user_id)
 
