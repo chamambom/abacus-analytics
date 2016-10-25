@@ -1,15 +1,33 @@
 from flask import Flask, request, redirect, url_for, render_template, flash
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from flask_mail import Message, Mail
 from forms import SignupForm, LoginForm
 from sqlalchemy import func
 from utils import *
 
+mail = Mail()
+
 application = Flask(__name__)
+
 application.secret_key = 'A0Zr98jh/3yXR~XHH!jmN]LWX/,?RT'
 login_manager = LoginManager()
 login_manager.init_app(application)
 login_manager.login_view = '/login'
 login_manager.login_message = u"You are not authorised to view this page"
+mail.init_app(application)
+
+application.config["MAIL_SERVER"] = "smtp.gmail.com"
+application.config["MAIL_PORT"] = 465
+application.config["MAIL_USE_SSL"] = True
+application.config["MAIL_USERNAME"] = 'chamambom@gmail.com'
+application.config["MAIL_PASSWORD"] = 'beautiful'
+
+SECURITY_EMAIL_SENDER = 'chamambom@gmail.com'
+RECAPTCHA_USE_SSL = False
+RECAPTCHA_PUBLIC_KEY = '6LeYIbsSAAAAACRPIllxA7wvXjIE411PfdB2gt2J'
+RECAPTCHA_PRIVATE_KEY = '6LeYIbsSAAAAAJezaIq3Ft_hSTo0YtyeFG-JgRtu'
+RECAPTCHA_DATA_ATTRS = {'theme': 'light'}
+application.config.from_object(__name__)
 
 
 @application.route('/')
@@ -223,6 +241,9 @@ def register():
             return render_template('register.html', form=form)
         else:
             newuser = User(form.password.data, form.email.data)
+            msg = Message(form.subject.data, sender='contact@bsureunion.com', recipients=['me@gmail.com'])
+            msg.body = """ From: %s <%s>  %s  """ % (form.name.data, form.email.data, form.message.data)
+            mail.send(msg)
             db.session.add(newuser)
             db.session.commit()
 
