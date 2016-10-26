@@ -1,8 +1,9 @@
-from flask_wtf import Form, RecaptchaField
+from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, TextAreaField, SubmitField, validators, PasswordField
 from models import User
 
-class ContactForm(Form):
+
+class ContactForm(FlaskForm):
     name = StringField("Name", [validators.DataRequired("Please enter your name.")])
     email = StringField("Email",
                         [validators.DataRequired("Please enter your email address."), validators.Email("Please enter a valid email address.")])
@@ -11,7 +12,7 @@ class ContactForm(Form):
     submit = SubmitField("Send")
 
 
-class SignupForm(Form):
+class SignupForm(FlaskForm):
     email = StringField("Email", [validators.DataRequired("Please enter your email address."),
                                   validators.Email("Please enter a valid email address.")])
     # password = StringField("Password", [validators.DataRequired("Please enter your password.")])
@@ -21,10 +22,10 @@ class SignupForm(Form):
 
 
     def __init__(self, *args, **kwargs):
-        Form.__init__(self, *args, **kwargs)
+        FlaskForm.__init__(self, *args, **kwargs)
 
     def validate(self):
-        if not Form.validate(self):
+        if not FlaskForm.validate(self):
             return False
 
         user = User.query.filter_by(email=self.email.data.lower()).first()
@@ -35,21 +36,21 @@ class SignupForm(Form):
             return True
 
 
-class LoginForm(Form):
+class LoginForm(FlaskForm):
     email = StringField("Email", [validators.DataRequired("Please enter your email address."), validators.Email("Please enter your email address.")])
     password = PasswordField('Password', [validators.DataRequired("Please enter a password.")])
     submit = SubmitField("Sign In")
 
-    def __init__(self, *args, **kwargs):
-        Form.__init__(self, *args, **kwargs)
-
-    def validate_on_submit(self):
-        if not Form.validate(self):
-            return False
-
-        user = User.query.filter_by(email=self.email.data.lower()).first()
-        if user and user.check_password(self.password.data):
-            return True
-        else:
-            self.email.errors.append("Incorrect login credentials")
-            return False
+    # def __init__(self, *args, **kwargs):
+    #     Form.__init__(self, *args, **kwargs)
+    #
+    # def validate(self):
+    #     if not Form.validate(self):
+    #         return False
+    #
+    #     user = User.query.filter_by(email=self.email.data.lower()).first()
+    #     if user and user.check_password(self.password.data):
+    #         return True
+    #     else:
+    #         self.email.errors.append("Incorrect login credentials")
+    #         return False

@@ -25,7 +25,7 @@ class User(db.Model):
         self.password = generate_password_hash(password)
 
     def check_password(self, password):
-        return  check_password_hash(self.password, password)
+        return check_password_hash(self.password, password)
 
     @property
     def is_active(self):
@@ -60,7 +60,7 @@ class User(db.Model):
         # return False
         #
         # def get_id(self):
-        #     return unicode(self.user_id)
+        # return unicode(self.user_id)
         #
         # def __repr__(self):
         #     return '<User %r>' % (self.user_id)

@@ -241,9 +241,9 @@ def register():
             return render_template('register.html', form=form)
         else:
             newuser = User(form.password.data, form.email.data)
-            msg = Message(form.subject.data, sender='contact@bsureunion.com', recipients=['me@gmail.com'])
-            msg.body = """ From: %s <%s>  %s  """ % (form.email.data)
-            mail.send(msg)
+            # msg = Message('hie', sender='chamambom@gmail.com', recipients=['chamambom@gmail.com'])
+            # msg.body = """ From: %s  """ % (form.email.data)
+            # mail.send(msg)
             db.session.add(newuser)
             db.session.commit()
 
@@ -257,7 +257,7 @@ def register():
 
 @application.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm(request.form)
+    form = LoginForm()
     if request.method == 'POST':
         if form.validate_on_submit():
             user = User.query.filter_by(email=form.email.data).first()
@@ -269,11 +269,11 @@ def login():
                   return redirect(url_for('rate_isp_service'))
                 except:
                     db.session.rollback()
-                    db.session.flush()
                     user.authenticated = False
             else:
-                print('ERROR! Incorrect login credentials.', 'error')
+                flash('ERROR! Incorrect login credentials.', 'danger')
     return render_template('login.html', form=form)
+
 
 
 @application.route('/logout')
