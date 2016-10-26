@@ -260,18 +260,18 @@ def login():
     form = LoginForm()
     if request.method == 'POST':
         if form.validate_on_submit():
-            user = User.query.filter_by(email=form.email.data).first()
-            if user is not None and user.check_password(form.password.data):
-                try:
-                  user.authenticated = True
-                  login_user(user)
-                  print('Thanks for logging in, {}'.format(current_user.email))
-                  return redirect(url_for('rate_isp_service'))
-                except:
-                    db.session.rollback()
-                    user.authenticated = False
-            else:
-                flash('ERROR! Incorrect login credentials.', 'danger')
+            try:
+                user = User.query.filter_by(email=form.email.data).first()
+                if user is not None and user.check_password(form.password.data):
+                    user.authenticated = True
+                    login_user(user)
+                    print('Thanks for logging in, {}'.format(current_user.email))
+                    return redirect(url_for('rate_isp_service'))
+                else:
+                    flash('ERROR! Incorrect login credentials.', 'danger')
+            except:
+                db.session.rollback()
+                raise
     return render_template('login.html', form=form)
 
 
