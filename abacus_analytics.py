@@ -242,7 +242,7 @@ def register():
         else:
             newuser = User(form.password.data, form.email.data)
             msg = Message(form.subject.data, sender='contact@bsureunion.com', recipients=['me@gmail.com'])
-            msg.body = """ From: %s <%s>  %s  """ % (form.name.data, form.email.data, form.message.data)
+            msg.body = """ From: %s <%s>  %s  """ % (form.email.data)
             mail.send(msg)
             db.session.add(newuser)
             db.session.commit()
@@ -261,12 +261,16 @@ def login():
     if request.method == 'POST':
         if form.validate_on_submit():
             user = User.query.filter_by(email=form.email.data).first()
-            print(user)
             if user is not None and user.check_password(form.password.data):
-                user.authenticated = True
-                login_user(user)
-                print('Thanks for logging in, {}'.format(current_user.email))
-                return redirect(url_for('rate_isp_service'))
+                try:
+                  user.authenticated = True
+                  login_user(user)
+                  print('Thanks for logging in, {}'.format(current_user.email))
+                  return redirect(url_for('rate_isp_service'))
+                except:
+                    db.session.rollback()
+                    db.session.flush()
+                    user.authenticated = False
             else:
                 print('ERROR! Incorrect login credentials.', 'error')
     return render_template('login.html', form=form)
