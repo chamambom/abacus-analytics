@@ -271,7 +271,7 @@ def login():
                     flash('ERROR! Incorrect login credentials.', 'danger')
             except:
                 db.session.rollback()
-                raise
+                db.session.remove()
     return render_template('login.html', form=form)
 
 
