@@ -1,33 +1,18 @@
-from flask import Flask, request, redirect, url_for, render_template, flash
+from flask import request, redirect, url_for, render_template, flash
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from flask_mail import Message, Mail
 from forms import SignupForm, LoginForm
 from sqlalchemy import func
 from utils import *
+from config import *
 
-mail = Mail()
 
-application = Flask(__name__)
 
-application.secret_key = 'A0Zr98jh/3yXR~XHH!jmN]LWX/,?RT'
+
+
 login_manager = LoginManager()
 login_manager.init_app(application)
 login_manager.login_view = '/login'
-login_manager.login_message = u"You are not authorised to view this page"
-mail.init_app(application)
-
-application.config["MAIL_SERVER"] = "smtp.gmail.com"
-application.config["MAIL_PORT"] = 465
-application.config["MAIL_USE_SSL"] = True
-application.config["MAIL_USERNAME"] = 'chamambom@gmail.com'
-application.config["MAIL_PASSWORD"] = 'beautiful'
-
-SECURITY_EMAIL_SENDER = 'chamambom@gmail.com'
-RECAPTCHA_USE_SSL = False
-RECAPTCHA_PUBLIC_KEY = '6LeYIbsSAAAAACRPIllxA7wvXjIE411PfdB2gt2J'
-RECAPTCHA_PRIVATE_KEY = '6LeYIbsSAAAAAJezaIq3Ft_hSTo0YtyeFG-JgRtu'
-RECAPTCHA_DATA_ATTRS = {'theme': 'light'}
-application.config.from_object(__name__)
+login_manager.login_message = u"You are not authorised to view this page ,Login first"
 
 
 @application.route('/')
@@ -271,8 +256,8 @@ def login():
                     flash('ERROR! Incorrect login credentials.', 'danger')
             except:
                 db.session.rollback()
+                raise
     return render_template('login.html', form=form)
-
 
 
 @application.route('/logout')
