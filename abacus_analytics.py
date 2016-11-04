@@ -6,9 +6,6 @@ from utils import *
 from config import *
 
 
-
-
-
 login_manager = LoginManager()
 login_manager.init_app(application)
 login_manager.login_view = '/login'
@@ -256,8 +253,19 @@ def login():
                     flash('ERROR! Incorrect login credentials.', 'danger')
             except:
                 db.session.rollback()
+                db.session.remove()
                 raise
     return render_template('login.html', form=form)
+
+
+@application.route('/user_count')
+def user_count():
+    user_count_registered = User.query.count()
+    print(user_count_registered)
+
+    user_count_active = db.session.query(User.email).filter(User.authenticated == 1).count()
+    print(user_count_active)
+    return render_template('layout.html', user_count_registered=user_count_registered, user_count_active=user_count_active)
 
 
 @application.route('/logout')
@@ -278,6 +286,12 @@ def user_loader(user_id):
     """
     return User.query.get(user_id)
 
+# @application.teardown_request
+# def teardown_request(exception):
+# if exception:
+#         db.session.rollback()
+#         db.session.remove()
+#     db.session.remove()
 
 if __name__ == '__main__':
     application.run(debug=True)

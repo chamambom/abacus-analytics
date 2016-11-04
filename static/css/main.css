@@ -94,7 +94,9 @@ a {
 }
 
 .btn-default {
-    background-color: #e7e7e7;
+    background-color: #f5f3ee;
+    color: #666;
+
 }
 
 .navbar-header > .navbar-brand {
@@ -126,6 +128,11 @@ a {
     padding: 5px;
     float: right;
     width: 548px;
+
+    border-radius: 0px 5px 5px 0px;
+-moz-border-radius: 0px 5px 5px 0px;
+-webkit-border-radius: 0px 5px 5px 0px;
+
 }
 
 .col-sm-3 {
@@ -146,9 +153,15 @@ a {
     float: left;
     height:auto;
     position: relative;
-    background-color:#fcfcfc;
+    background-color:#f5f3ee;
+    color:#000 ;
 
-       }
+
+    border-radius: 5px 0px 0px 5px;
+    -moz-border-radius: 5px 0px 0px 5px;
+    -webkit-border-radius: 5px 0px 0px 5px;
+   
+}
 .panel {
     margin-bottom: 5px;
 }

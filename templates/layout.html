@@ -75,7 +75,10 @@
 							<li><a id="loginLink" href="{{ url_for('login') }}" role="button"><i class="fa fa-lock login"></i><span>User Login</span></a></li>
                             <li><a  href="{{ url_for('register') }}" role="button"><i class="fa fa-pencil register"></i><span>Register</span></a></li>
 			{% endif %}
-
+            <li>
+            {{ user_count_registered }}
+            {{ user_count_active }}
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
