@@ -4,7 +4,6 @@ from forms import SignupForm, LoginForm
 from sqlalchemy import func
 from utils import *
 from config import *
-import dateutil
 
 
 login_manager = LoginManager()
