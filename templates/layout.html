@@ -53,8 +53,7 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="{{url_for('home')}}">Home</a></li>
-            <li><a href="{{url_for('react')}}">ReactTest</a></li>
-            <li><a href="{{url_for('login')}}">ISP Portal</a></li>
+            <li><a href="{{url_for('react')}}">React</a></li>
             <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About Us<span class="caret"></span></a>
                    <ul class="dropdown-menu">
@@ -67,18 +66,20 @@
                         <li><a href="#">One more separated link</a></li>
                    </ul>
                 </li>
-             {% if current_user.is_authenticated %}
-                            <li><a href="{{ url_for('logout') }}">Logout</a></li>
-							<li><a href="#">{{current_user.email}}</a></li>
-			{% endif %}
+
 			{% if not current_user.is_authenticated %}
-							<li><a id="loginLink" href="{{ url_for('login') }}" role="button"><i class="fa fa-lock login"></i><span>User Login</span></a></li>
-                            <li><a  href="{{ url_for('register') }}" role="button"><i class="fa fa-pencil register"></i><span>Register</span></a></li>
+							<li><a id="loginLink" href="{{ url_for('login') }}" role="button"><i class="fa fa-lock login"></i><span>Login</span></a></li>
+                            <li><a  href="{{ url_for('register') }}" role="button"><i class="fa fa-pencil register"></i><span>Signup</span></a></li>
 			{% endif %}
-            <li>
-            {{ user_count_registered }}
-            {{ user_count_active }}
-            </li>
+
+            <li><a href="#"> {{ user_count_registered }} <i class="fa fa-user" aria-hidden="true"></i> registered</a></li>
+            <li><a href="#"> {{ user_count_active }}  <i class="fa fa-user" aria-hidden="true"></i> Online</a></li>
+             {% if current_user.is_authenticated %}
+                            <li><a href="{{url_for('myprofile')}}">myProfile</a></li>
+                            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+			{% endif %}
+
+
           </ul>
         </div><!--/.nav-collapse -->
       </div>

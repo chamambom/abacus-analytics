@@ -1,0 +1,23 @@
+ {% extends "layout.html" %}
+ {% block body %}
+
+    <div id="mount-point"></div>
+
+     <script type="text/jsx">
+        /** @jsx React.DOM */
+        ReactDOM.render(
+            <h1>Hello, world!</h1>,
+            document.getElementById('example')
+        );
+    </script>
+
+<div id="example">
+ <p>Registered on:{{ (current_user.registered_on) }}</p>
+ <p>Email Address:{{ current_user.email }} <a href="#">Change Email NB:This is your current username</a> </p>
+
+ </div>
+
+
+
+
+{% endblock %}

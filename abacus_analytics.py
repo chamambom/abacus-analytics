@@ -4,6 +4,7 @@ from forms import SignupForm, LoginForm
 from sqlalchemy import func
 from utils import *
 from config import *
+import dateutil
 
 
 login_manager = LoginManager()
@@ -258,14 +259,19 @@ def login():
     return render_template('login.html', form=form)
 
 
-@application.route('/user_count')
+@application.context_processor
 def user_count():
     user_count_registered = User.query.count()
-    print(user_count_registered)
-
     user_count_active = db.session.query(User.email).filter(User.authenticated == 1).count()
-    print(user_count_active)
-    return render_template('layout.html', user_count_registered=user_count_registered, user_count_active=user_count_active)
+    return dict(user_count_registered=user_count_registered, user_count_active=user_count_active)
+
+
+@application.route('/myprofile')
+@login_required
+def myprofile():
+    logged_in_user = db.session.query(User.email).filter(User.email == current_user.email)
+    print logged_in_user
+    return render_template('myprofile.html', logged_in_user=logged_in_user)
 
 
 @application.route('/logout')
@@ -289,8 +295,8 @@ def user_loader(user_id):
 # @application.teardown_request
 # def teardown_request(exception):
 # if exception:
-#         db.session.rollback()
-#         db.session.remove()
+# db.session.rollback()
+# db.session.remove()
 #     db.session.remove()
 
 if __name__ == '__main__':
