@@ -260,8 +260,13 @@ def login():
 
 @application.context_processor
 def user_count():
-    user_count_registered = User.query.count()
-    user_count_active = db.session.query(User.email).filter(User.authenticated == 1).count()
+    try:
+        user_count_registered = User.query.count()
+        user_count_active = db.session.query(User.email).filter(User.authenticated == 1).count()
+    except:
+        db.session.rollback()
+        db.session.remove()
+        raise
     return dict(user_count_registered=user_count_registered, user_count_active=user_count_active)
 
 

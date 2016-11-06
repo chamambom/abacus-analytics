@@ -4,7 +4,7 @@ body {
     font-size: 15px;
     line-height: 1.42857;
     margin-top: 50px;
-    font-weight:200;
+    font-weight:500;
 }
 
 .glyphicon {
@@ -153,10 +153,6 @@ a {
     float: left;
     height:auto;
     position: relative;
-    background-color:#f5f3ee;
-    color:#000 ;
-
-
     border-radius: 5px 0px 0px 5px;
     -moz-border-radius: 5px 0px 0px 5px;
     -webkit-border-radius: 5px 0px 0px 5px;
