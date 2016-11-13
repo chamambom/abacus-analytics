@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, TextAreaField, SubmitField, validators, PasswordField
-from models import User
+from app.models import User
 
 
 class ContactForm(FlaskForm):

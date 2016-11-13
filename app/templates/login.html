@@ -16,7 +16,6 @@
       </form>#}
 
 
-
     <form action="{{ url_for('login') }}" method=post class="form-signin">
 
     {{ form.hidden_tag() }}
@@ -35,10 +34,9 @@
     {% endfor %}
   <input type="password" id="inputPassword" name="password" class="form-control" value="{{ request.form.password }}"
 
-
-
     <button class="btn btn-lg btn-primary btn-block">{{ form.submit }}</button>
   </form>
+
 
 
 

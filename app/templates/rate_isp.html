@@ -1,21 +1,20 @@
 {% extends "layout.html" %}
 {% block body %}
 
-    <form action="{{ url_for('rate_isp_service') }}" class = "form-custom" method="post">
+    <form action="{{ url_for('rate_isp') }}" class = "form-custom" method="post">
                 <div class="container-fluid"><!-- Row 1 -->
                     <div class="col-lg-6">
                           <div class="form-group">
-                            <label for="metric_name">Please Select KPI</label>
-                            <select id="metric_id" name="metric_id" class="form-control">
-                             {% for metric in servicemetric_entries %}
-                              <option value="{{ metric.metric_id }}">{{ metric.metric_name }}</option>
+                            <label for="kpi_name">Please Select KPI</label>
+                            <select id="kpi_id" name="kpi_id" class="form-control">
+                             {% for kpi in kpi_entries %}
+                              <option value="{{ kpi.kpi_id }}">{{ kpi.kpi_name }}</option>
                               {% else %}
                             <li><em>No entries here so far</em></li>
                             {% endfor %}
                             </select>
                            </div>
                     </div>
-
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="isp_name">ISP Name</label>
@@ -32,22 +31,7 @@
 
                 <div class="container-fluid"><!-- Row 2 -->
 
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label  for="rate">Service Name</label>
-                            <select id="service_id" name="service_id" class="form-control">
-                            {% for service in services_entries %}
-                              <option value="{{ service.service_id }}">{{ service.service_name }}</option>
-                            {% else %}
-                            <li><em>No entries here so far</em></li>
-                            {% endfor %}
-                            </select>
-                        </div>
-                    </div>
-
-
-
-                    <div class="col-lg-6">
+                      <div class="col-lg-6">
                         <div class="form-group">
                               <label for="selectbasic">RateService</label>
                               <select id="ratings_value" name="ratings_value" class="form-control">
@@ -65,7 +49,7 @@
                     <div class="col-lg-12">
                          <div class="form-group">
                             <label for="textarea">Share your Experiences</label>
-                            <textarea class="form-control" name="custom_rating_comment"></textarea>
+                            <textarea class="form-control" name="kpi_rating_comment"></textarea>
                          </div>
                     </div>
                 </div>

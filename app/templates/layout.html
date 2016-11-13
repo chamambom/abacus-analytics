@@ -91,10 +91,12 @@
 {% if not current_user.is_authenticated %}
     <div class="aboutus">
     <p>Are you a ZOL,Frampol,YoAfrica ,Liquid , Utande, Africom,Telco or Telone customer ? </p>
-    <p>We collect customer reviews in order to create ISP satisfaction reputations</p>
+    <p>We need customer experience reviews in order to create ISP satisfaction reputations</p>
       <ul>
-        <li>We will use your data to help the next prospective user to choose which ISP is right for them</li>
+        <li>We will use your data to help the prospective users to choose which ISP is right for them</li>
         <li>We will create a time series of all ISP customer reviews agaisnt the KPIs</li>
+        <li>Show number of users with more that 1 ISP</li>
+        <li>etc etc</li>
       </ul>
     </div>
 {% endif %}
@@ -108,7 +110,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close">
-                            </span>Overall QOS scores</a>
+                            </span>ISP Reviews</a>
                         </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
@@ -116,30 +118,22 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a  href="{{ url_for('rate_isp_service') }}" >Rate Service</a>
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a  href="{{ url_for('rate_isp') }}" >Rate your ISP</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-flash text-success"></span><a  href="{{ url_for('view_my_ratings') }}">My QOS views</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-file text-info"></span><a  href="{{ url_for('build_service_report') }}" >View Overall ISP Scores</a>
-                                    </td>
-                                </tr>
+
                                  <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-file text-info"></span><a  href="{{ url_for('rate_isp_service_multiple') }}" >Rate services</a>
+                                        <span class="glyphicon glyphicon-flash text-success"></span><a  href="{{ url_for('view_my_isp_ratings') }}">My ISP Ratings</a>
                                     </td>
                                 </tr>
-                                <tr>
+
+                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-comment text-success"></span><a  href="{{ url_for('survey') }}" >Build custom QoS report</a>
-                                        <span class="badge">42</span>
+                                        <span class="glyphicon glyphicon-flash text-success"></span><a  href="{{ url_for('view_overall_isp_ratings') }}">Overall ISP Ratings</a>
                                     </td>
                                 </tr>
+
                             </table>
                         </div>
                     </div>
@@ -148,7 +142,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th">
-                            </span>Select ISP</a>
+                            </span>Services Reviews</a>
                         </h4>
                     </div>
                     <div id="collapseTwo" class="panel-collapse collapse">
@@ -156,22 +150,28 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <a href="#">Orders</a> <span class="label label-success">$ 320</span>
+                                       <span class="glyphicon glyphicon-pencil text-primary"></span><a  href="{{ url_for('rate_service') }}" >Rate Service</a>
+                                    </td>
+                                </tr>
+                               <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-flash text-success"></span><a  href="{{ url_for('view_my_service_ratings') }}">My Service Ratings</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="#">Invoices</a>
+                                        <span class="glyphicon glyphicon-file text-info"></span><a  href="{{ url_for('view_overall_service_ratings') }}" >Overall Service Ratings</a>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-file text-info"></span><a  href="{{ url_for('survey') }}" >Rate services</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="#">Shipments</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="#">Tex</a>
+                                        <span class="glyphicon glyphicon-comment text-success"></span><a  href="{{ url_for('survey') }}" >Build custom QoS report</a>
+                                        <span class="badge">42</span>
                                     </td>
                                 </tr>
                             </table>
@@ -205,7 +205,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-trash text-danger"></span><a href="http://www.jquery2dotnet.com" class="text-danger">
+                                        <span class="glyphicon glyphicon-trash text-danger"></span><a href="#" class="text-danger">
                                             Delete Account</a>
                                     </td>
                                 </tr>
