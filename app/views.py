@@ -6,8 +6,6 @@ from app.models import User, Services, Service_metric_ratings, Ratings, Kpis, Kp
 from app import application, db
 
 
-
-
 @application.route('/')
 def index():
     return render_template('home.html')
@@ -238,7 +236,9 @@ def register():
         if form.validate() == False:
             return render_template('register.html', form=form)
         else:
-            newuser = User(form.password.data, form.email.data)
+            password = form.password.data
+            email = form.email.data
+            newuser = User(email, password)
             # msg = Message('hie', sender='chamambom@gmail.com', recipients=['chamambom@gmail.com'])
             # msg.body = """ From: %s  """ % (form.email.data)
             # mail.send(msg)
@@ -257,8 +257,10 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         try:
-            user = User.query.filter_by(email=form.email.data).first_or_404()
-            if user is not None and user.check_password(form.password.data):
+            email = form.email.data
+            password = form.password.data
+            user = User.query.filter_by(email=email).first()
+            if user is not None and user.check_password(password):
                 user.authenticated = True
                 login_user(user)
                 print('Thanks for logging in, {}'.format(current_user.email))
@@ -271,6 +273,13 @@ def login():
             db.session.remove()
             raise
     return render_template('login.html', form=form)
+
+
+
+@application.route('/dashboard')
+@login_required
+def show_dashboard():
+    return render_template('user.html')
 
 
 @application.context_processor
@@ -322,8 +331,11 @@ def dropdown():
 @application.route('/myprofile')
 @login_required
 def myprofile():
-    logged_in_user = db.session.query(User.email).filter(User.email == current_user.email)
-    print logged_in_user
+    try:
+        logged_in_user = db.session.query(User.email).filter(User.email == current_user.email)
+    except:
+        db.session.rollback()
+        db.session.remove()
     return render_template('myprofile.html', logged_in_user=logged_in_user)
 
 
@@ -336,8 +348,6 @@ def logout():
     logout_user()
     flash('You have logged out ,thank you for your contribution', 'success')
     return redirect(url_for('login'))
-
-
 
 # Look into the function below and see how you can use it
 

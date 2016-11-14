@@ -1,12 +1,14 @@
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, TextAreaField, SubmitField, validators, PasswordField
 from app.models import User
+from wtforms.validators import DataRequired
 
 
 class ContactForm(FlaskForm):
     name = StringField("Name", [validators.DataRequired("Please enter your name.")])
     email = StringField("Email",
-                        [validators.DataRequired("Please enter your email address."), validators.Email("Please enter a valid email address.")])
+                        [validators.DataRequired("Please enter your email address."),
+                         validators.Email("Please enter a valid email address.")])
     subject = StringField("Subject", [validators.DataRequired("Please enter a subject.")])
     message = TextAreaField("Message", [validators.DataRequired("Please enter a message.")])
     submit = SubmitField("Send")
@@ -19,7 +21,6 @@ class SignupForm(FlaskForm):
     password = PasswordField('Password', [validators.DataRequired("Please enter a password.")])
     recaptcha = RecaptchaField()
     submit = SubmitField("Create account")
-
 
     def __init__(self, *args, **kwargs):
         FlaskForm.__init__(self, *args, **kwargs)
@@ -37,7 +38,8 @@ class SignupForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    email = StringField("Email", [validators.DataRequired("Please enter your email address."), validators.Email("Please enter your email address.")])
+    email = StringField("Email", [validators.DataRequired("Please enter your email address."),
+                                  validators.Email("Please enter your email address.")])
     password = PasswordField('Password', [validators.DataRequired("Please enter a password.")])
     submit = SubmitField("Sign In")
 

@@ -15,8 +15,9 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>#}
 
+{#
 
-    <form action="{{ url_for('login') }}" method=post class="form-signin">
+    <form action="" method=post class="form-signin" name="login">
 
     {{ form.hidden_tag() }}
     <h4 class="form-signin-heading">Login</h4>
@@ -32,12 +33,38 @@
     {% for message in form.password.errors %}
         <div class="test">{{ message }}</div>
     {% endfor %}
-  <input type="password" id="inputPassword" name="password" class="form-control" value="{{ request.form.password }}"
+  <input type="password" id="inputPassword" name="password" class="form-control" value="{{ request.form.password }}">
 
     <button class="btn btn-lg btn-primary btn-block">{{ form.submit }}</button>
   </form>
+#}
 
 
+
+<form action="" method="POST" name="login">
+    {{ form.hidden_tag() }}
+    <table>
+        <tr>
+            <th>Email:</th>
+            <td>{{ form.email(size=32) }}</td>
+        </tr>
+        {% for error in form.email.errors %}
+        <tr>
+            <td><span style="color: red;">[{{ error }}]</span></td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <th>Password:</th>
+            <td>{{ form.password(size=32) }}</td>
+        </tr>
+        {% for error in form.password.errors %}
+        <tr>
+            <td><span style="color: red;">[{{ error }}]</span></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p><input type="submit" value="Login"></p>
+</form>
 
 
 {% endblock %}
