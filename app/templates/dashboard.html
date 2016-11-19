@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block body %}
+    <ul class="list-group">
+        <li class="list-group-item disabled"><h5>Welcome {{ current_user.email }}</h5></li>
+        <li class="list-group-item">Which ISP and Service are you currently subscribed to</li>
+    </ul>
+    <form action="{{ url_for('current_subscribed_isp_service') }}" class="form-custom" method="post">
+        <div class="container-fluid"><!-- Row 1 -->
+            <div class="col-lg-6">
+                <div class="form-group">
+                    {% for isp in isp_entries %}
+                        <div class="checkbox">
+                            <input type="checkbox" name="isp_name" value="{{ isp.isp_name }}">{{ isp.isp_name }}
+                        </div>
+                        <div class="form-group">
+                            {% for service in services_entries %}
+                                <div class="checkbox">
+                                    <input type="checkbox" name="service_name"
+                                           value="({{ isp.isp_name }},{{ service.service_name }})">{{ service.service_name }}
+                                </div>
+                            {% else %}
+                                <li><em>No entries here so far</em></li>
+                            {% endfor %}
+                        </div>
+
+
+
+                    {% else %}
+                        <li><em>No entries here so far</em></li>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            {#  <div class="col-lg-6">
+                        <div class="form-group">
+                            {% for service in services_entries %}
+                                <div class="checkbox">
+                                    <input type="checkbox" id="service_id" name="{{ service.service_name}}">{{ service.service_name}}
+                                </div>
+                            {% else %}
+                            <li><em>No entries here so far</em></li>
+                            {% endfor %}
+                            </select>
+                        </div>
+                    </div>#}
+        </div>
+        <!-- End of row 1-->
+
+
+        <div class="container-fluid"><!-- Row 4 -->
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="submit"></label>
+                    <button class="btn btn-lg btn-primary" type="submit">Share Your QOS Ratings</button>
+                </div>
+            </div>
+        </div>
+        {#end of row 4 #}
+
+    </form>
+
+{% endblock %}

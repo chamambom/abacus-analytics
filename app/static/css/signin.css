@@ -1,29 +1,46 @@
 .form-signin {
     background-color: #f5f3ee;
     border: 1px solid #e9e9e9;
-    margin: 3px auto 3px;
-    max-width: 400px;
+    margin: 3px 3px;
+    max-width: 250px;
     padding: 20px;
 }
-.form-custom{
+
+.facebook_login {
+    background-color: #f5f3ee;
+    border: 1px solid #e9e9e9;
+
+    max-width: 250px;
+    padding: 20px;
+    position: relative;
+    top: -285px;
+    left: 278px;
+}
+
+.form-custom {
     background-color: #f5f3ee;
     border: 1px solid #e9e9e9;
     margin: 2px auto 2px;
     padding: 20px;
-    /*max-width: 550px;*/
+
 }
 
-
+.user_access_ {
+    border: 1px solid #e9e9e9;
+    background-color: #fff ;
+}
 
 .btn-primary {
-    background-color: #337ab7;
-    border-color: #2e6da4;
+    background-color: #FF851B ;
+    border-color: #e9e9e9;
     color: #fff;
 }
+
 .container-fluid {
     padding: 12px;
 
 }
+
 .tabbed_container {
     margin: 3px;
     padding: 30px;
@@ -73,8 +90,8 @@
 }
 
 label {
-    font-weight: bold;
-    color:#999;
+    font-weight: 200;
+    color: #999;
 }
 
 .checkbox label, .radio label {
@@ -85,4 +102,4 @@ label {
     margin-left: 3px;
     border-radius: 3px 1px;
     font-size: 14px;
-    }
+}

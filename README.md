@@ -1,2 +1,2 @@
 # Abacus Analytics
-Application to compare QOS for services offered by zimbabwean ISPs
+Application to create a Zimbabwean ISP reputation analytics database based on customer experience reviews using pre-defined KPIs

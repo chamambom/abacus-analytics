@@ -1,10 +1,10 @@
 body {
     color: #666;
-    font-family: "FontAwesome",calibri, sans-serif;
+    font-family: "FontAwesome", calibri, sans-serif;
     font-size: 15px;
     line-height: 1.42857;
     margin-top: 50px;
-    font-weight:100;
+    font-weight: 100;
 }
 
 .glyphicon {
@@ -64,6 +64,11 @@ a {
 
 }
 
+em{
+    color: #000;
+    font-weight: 400;
+}
+
 /*################################ Tabbed Panes  ###################################################*/
 
 .nav-tabs > li, .nav-pills > li {
@@ -109,7 +114,7 @@ a {
 }
 
 .container {
-    max-width:800px;
+    max-width: 800px;
     min-width: 500px;
     border-right: 0px solid #e9e9e9;
     border-left: 0px solid #e9e9e9;
@@ -120,7 +125,7 @@ a {
 }
 
 .col-sm-9 {
-    margin:5px auto;
+    margin: 5px auto;
     border-top: 1px solid #e9e9e9;
     border-left: 1px solid #e9e9e9;
     border-right: 1px solid #e9e9e9;
@@ -130,34 +135,36 @@ a {
     width: 548px;
 
     border-radius: 0px 5px 5px 0px;
--moz-border-radius: 0px 5px 5px 0px;
--webkit-border-radius: 0px 5px 5px 0px;
+    -moz-border-radius: 0px 5px 5px 0px;
+    -webkit-border-radius: 0px 5px 5px 0px;
 
 }
 
 .col-sm-3 {
-    width:240px;
+    width: 240px;
     top: 2px;
-    padding-right:1px;
+    padding-right: 1px;
 }
 
-.col-md-3{
+.col-md-3 {
     border: 0px solid #e9e9e9;
 }
 
-.aboutus{
+.aboutus {
     border: solid 1px #e9e9e9;
-    width:240px;
+    width: 240px;
     margin: 5px 0;
-    padding:5px;
+    padding: 5px;
     float: left;
-    height:auto;
+    height: auto;
     position: relative;
     border-radius: 5px 0px 0px 5px;
     -moz-border-radius: 5px 0px 0px 5px;
     -webkit-border-radius: 5px 0px 0px 5px;
-   
+    /*color: #000;
+    font-weight: 500;*/
 }
+
 .panel {
     margin-bottom: 5px;
 }
@@ -192,14 +199,13 @@ a {
 
 .h4, h4, .nav > li {
     font-size: 16px;
-    color: #ed1c24;
-
+    font-weight: 600;
+    color: #FF851B ;
 }
 
 .h5, h5 {
-    color: #666;
-    font-weight: bold;
-    font-style: oblique;
+    color:  #FF851B  ;
+    font-weight: 600;
 }
 
 .form-group {
@@ -231,7 +237,6 @@ ol, ul {
     margin-left: -40px;
     font-style: oblique;
     margin-bottom: 8px;
-    font-weight: bold;
 }
 
 .alert-message {
@@ -246,3 +251,4 @@ b, strong {
     font-size: 18px;
     color: #ed1c24;
 }
+

@@ -1,49 +1,41 @@
 {% extends "layout.html" %}
 {% block body %}
 
-{#
-
-   <ul class="list-group">
-    <li class="list-group-item list-group-item-info">
-        <strong>{{count_of_users_who_rated }}</strong>
-         subscriber(s) have shared their QOS experiences for this ISP using the scale below and the average QOS score for this service is
-        <strong>{{average_isp__service_ratings}}</strong>
-    </li>
-   </ul>
-#}
-
-   <table class="table table-striped table-bordered table-hover">
+<table class="table table-striped table-bordered table-hover">
 
    <thead>
       <tr>
-         <th>ISP name</th>
+         <th>ISP</th>
          <th>KPI</th>
-         <th># of users who Rated</th>
-         <th>Sum of Ratings for all user(s)</th>
-         <th>Average QOS Score</th>
-         <th>Rating Verdict</th>
-       </tr>
+         <th>Rating</th>
+         <th>Rating Comment</th>
+         <th>Kpi Rating Comment</th>
+         <th>Pub Date</th>
+
+
+      </tr>
    </thead>
 
    <tbody>
+   {% for i in view_my_isp_ratings %}
       <tr>
-      {% for i in isp_ratings %}
       <td>{{ i.isp_name }}</td>
       <td>{{ i.kpi_name }}</td>
-      <td>{{ i.count_of_users }}</td>
-      <td>{{ i.sum_of_ratings }}</td>
-      <td>{{ i.avg_of_ratings|round|int }}</td>
-             {% for m in ratings_table_values %}
-                {% if (m.ratings_value) ==(i.avg_of_ratings|round|int)%}
-                     <td>{{ m.ratings_comment}}</td>
-                {% endif %}
-             {% endfor %}
-      </tr>
+      <td>{{ i.ratings_value}}</td>
+      <td>{{ i.ratings_comment}}</td>
+      <td>{{ i.kpi_rating_comment}}</td>
+      <td>{{ i.pub_date}}</td>
+
       {% else %}
-      <tr><td colspan="7"><em>No entries here so far</em></td></tr>
-      {% endfor %}
+      <td colspan="7"><em>No entries here so far</em></td>
+      {# <a href="{{ url_for('rate_isp_service') }}" class="btn btn-large btn-primary">Place New Service Ratings</a>#}
+      </tr>
+
+   {% endfor %}
+
+
+
    </tbody>
 
-   </table>
-
-  {% endblock %}
+</table>
+{% endblock %}

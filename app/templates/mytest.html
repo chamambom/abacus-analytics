@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block body %}
+<h4>Welcome {{ current_user.email }}</h4>
+
+   {% for key, value in checkbox_values.items() %}
+
+            <tr>
+               <th> {{ key }} </th>
+               <td> {{ value }} </td>
+            </tr>
+
+         {% endfor %}
+
+{% endblock %}

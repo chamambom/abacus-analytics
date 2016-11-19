@@ -1,41 +1,30 @@
 {% extends "layout.html" %}
 {% block body %}
-<form action="{{ url_for('view_overall_isp_ratings') }}" class = "form-custom" method="post">
-                <div class="container-fluid"><!-- Row 1 -->
-                    <div class="col-lg-6">
-                          <div class="form-group">
-                            <label for="metric_name">Please Select KPI</label>
-                            <select id="metric_name" name="metric_name" class="form-control">
-                             {% for metric in servicemetric_entries %}
-                              <option value="{{ metric.metric_name }}">{{ metric.metric_name }}</option>
-                              {% else %}
+    <form action="{{ url_for('view_overall_isp_ratings') }}" class="form-custom" method="post">
+        <div class="container-fluid"><!-- Row 1 -->
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="kpi_name">Please Select KPI</label>
+                    <select id="kpi_name" name="kpi_name" class="form-control">
+                        {% for kpi in kpi_entries %}
+                            <option value="{{ kpi.kpi_name }}">{{ kpi.kpi_name }}</option>
+                        {% else %}
                             <li><em>No entries here so far</em></li>
-                            {% endfor %}
-                            </select>
-                           </div>
-                    </div>
-                     <div class="col-lg-6">
-                        <div class="form-group">
-                            <label  for="rate">Service Name</label>
-                            <select id="service_name" name="service_name" class="form-control">
-                            {% for service in services_entries %}
-                              <option value="{{ service.service_name }}">{{ service.service_name }}</option>
-                            {% else %}
-                            <li><em>No entries here so far</em></li>
-                            {% endfor %}
-                            </select>
-                        </div>
-                    </div>
+                        {% endfor %}
+                    </select>
                 </div>
-                <div class="container-fluid"><!-- Row 2-->
+            </div>
+        </div>
+        <div class="container-fluid"><!-- Row 2-->
 
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label  for="Submit">Submit Data</label>
-                            <button class="btn btn-lg btn-primary" type="submit">Compare ISP QOS Ratings</button>
-                        </div>
-                    </div>
-                </div>  <!-- End of row 2-->
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="Submit">Submit Data</label>
+                    <button class="btn btn-lg btn-primary" type="submit">Compare ISP QOS Ratings</button>
+                </div>
+            </div>
+        </div>
+        <!-- End of row 2-->
 
-</form>
+    </form>
 {% endblock %}

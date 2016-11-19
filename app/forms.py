@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm, RecaptchaField
-from wtforms import StringField, TextAreaField, SubmitField, validators, PasswordField
+from wtforms import StringField, TextAreaField, SubmitField, validators, PasswordField, SelectMultipleField, widgets
 from app.models import User
-from wtforms.validators import DataRequired
 
 
 class ContactForm(FlaskForm):
@@ -43,16 +42,14 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', [validators.DataRequired("Please enter a password.")])
     submit = SubmitField("Sign In")
 
-    # def __init__(self, *args, **kwargs):
-    #     Form.__init__(self, *args, **kwargs)
-    #
-    # def validate(self):
-    #     if not Form.validate(self):
-    #         return False
-    #
-    #     user = User.query.filter_by(email=self.email.data.lower()).first()
-    #     if user and user.check_password(self.password.data):
-    #         return True
-    #     else:
-    #         self.email.errors.append("Incorrect login credentials")
-    #         return False
+
+data = [('value_a', 'Value A'), ('value_b', 'Value B'), ('value_c', 'Value C')]
+
+
+class MultipleCheckBoxes(FlaskForm):
+    example = SelectMultipleField(
+        'Pick Things!',
+        choices=data,
+        option_widget=widgets.CheckboxInput(),
+        widget=widgets.ListWidget(prefix_label=False)
+    )

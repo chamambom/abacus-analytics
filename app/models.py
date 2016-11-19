@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import db, login_manager
 from flask_login import UserMixin
 
+
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     user_id = db.Column('user_id', db.Integer, primary_key=True)
@@ -36,12 +37,15 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User %r>' % self.email
 
+
 @login_manager.user_loader
 def load_user(user_id):
     try:
         return User.query.get(user_id)
     except:
-        None
+        db.session.rollback()
+        db.session.remove()
+        raise
 
 
 class Isps(db.Model):
@@ -50,12 +54,37 @@ class Isps(db.Model):
     isp_name = db.Column('isp_name', db.String(80), unique=True)
     isp_description = db.Column('isp_description', db.String(180))
 
+    # services = db.relationship('Services', backref="isps", cascade="all, delete-orphan",lazy='dynamic')
+
+
     def __init__(self, isp_name, isp_description):
         self.isp_name = isp_name
         self.isp_description = isp_description
 
     def __repr__(self):
         return '<Isps %r>' % self.isp_name
+
+
+isp_service = db.Table('isp_service',
+                       db.Column('isp_id', db.Integer, db.ForeignKey('isps.isp_id')),
+                       db.Column('user_id', db.Integer, db.ForeignKey('user.user_id')),
+                       db.Column('service_id', db.Integer, db.ForeignKey('services.service_id'))
+                       )
+
+
+class Services(db.Model):
+    __tablename__ = "services"
+    service_id = db.Column('service_id', db.Integer, primary_key=True)
+    service_name = db.Column('service_name', db.String(80), unique=True)
+    # Defining the Foreign Key on the Child Table
+    service_catergory_id = db.Column(db.Integer, db.ForeignKey('service_catergory.service_catergory_id'))
+    # isp_id = db.Column(db.Integer, db.ForeignKey('Isps.isp_id'))
+
+    def __init__(self, service_name):
+        self.service_name = service_name
+
+    def __repr__(self):
+        return '<Services %r>' % self.service_name
 
 
 class Service_catergory(db.Model):
@@ -68,20 +97,6 @@ class Service_catergory(db.Model):
 
     def __repr__(self):
         return '<Service_catergory %r>' % self.service_catergory_name
-
-
-class Services(db.Model):
-    __tablename__ = "services"
-    service_id = db.Column('service_id', db.Integer, primary_key=True)
-    service_name = db.Column('service_name', db.String(80), unique=True)
-    # Defining the Foreign Key on the Child Table
-    service_catergory_id = db.Column(db.Integer, db.ForeignKey('service_catergory.service_catergory_id'))
-
-    def __init__(self, service_name):
-        self.service_name = service_name
-
-    def __repr__(self):
-        return '<Services %r>' % self.service_name
 
 
 class Service_metric(db.Model):

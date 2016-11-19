@@ -17,8 +17,7 @@
    <thead>
       <tr>
          <th>ISP name</th>
-         <th>KPI(metric)</th>
-         <th>Service Name</th>
+         <th>KPI</th>
          <th># of users who Rated</th>
          <th>Sum of Ratings for all user(s)</th>
          <th>Average QOS Score</th>
@@ -28,10 +27,9 @@
 
    <tbody>
       <tr>
-      {% for i in isp_ratings_per_service %}
+      {% for i in view_overall_isp_ratings %}
       <td>{{ i.isp_name }}</td>
-      <td>{{ i.metric_name }}</td>
-      <td>{{ i.service_name }}</td>
+      <td>{{ i.kpi_name }}</td>
       <td>{{ i.count_of_users }}</td>
       <td>{{ i.sum_of_ratings }}</td>
       <td>{{ i.avg_of_ratings|round|int }}</td>
