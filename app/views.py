@@ -191,7 +191,7 @@ def rate_service():
                 .filter_by(user_id=current_user.user_id).count()
 
             if exists:
-                flash('You have already provided ratings for this service , edit it instead', 'danger')
+                flash('You have already rated this service using that KPI , edit it instead', 'danger')
             else:
                 user_service_ratings.user = current_user
                 db.session.add(user_service_ratings)

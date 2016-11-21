@@ -44,35 +44,42 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+            {#<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                     aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-            </button>
-            </li><a class="navbar-brand" href="#">BL Analytics{#(Predictive analytics)#}</a>
+            </button>#}
+            <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename = 'img/blanalytics.png') }}"></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('react') }}">React</a></li>
+                {#<li><a href="{{ url_for('react') }}">React</a></li>#}
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">About Us<span class="caret"></span></a>
+                       aria-expanded="false">Our Story<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
+                        <li class="ourstory">
+                            This site is about Data analytics (Trending, Predictive, Comparative)
+                            in the ISP space and hopefully with time creating Predictive models.
+                            <p></p>
+                            Over time we have seen a proliferation of ISPs in Zimbabwe yet there is no information regarding
+                            currently subscribed user experiences.We are simply giving the internet community a platform to
+                            give us that data and help all prospective subscribers/customers/users make informed decisions
+                            based on real user data before they commit to any ISP.
+                        </li>
                         <li role="separator" class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li class="dropdown-header">Meet the team who made it all happen and what they had to say</li>
+                        <li><a href="#">Martin (Husband)</a></li>
+                        <li><a href="#">Mildred (Wife)</a></li>
+                        <li><a href="#">Mikhail (Son)</a></li>
                     </ul>
                 </li>
 
                 <li><a href="#"> {{ user_count_registered }} <i class="fa fa-user" aria-hidden="true"></i>
-                    Registered</a></li>
+                    Users</a></li>
                 <li><a href="#"> {{ user_count_active }} <i class="fa fa-user" aria-hidden="true"></i> Online</a></li>
 
                 {% if not current_user.is_authenticated %}
@@ -102,8 +109,8 @@
                 <li class="list-group-item disabled"><h4>Are you a ZOL ,Frampol ,YoAfrica ,Liquid , Utande, Africom,Telco or Telone customer ?</h4></li>
                 <li class="list-group-item">Lets <em>Build</em> an ISP reputation database together, share your personal experiences</li>
                 <li class="list-group-item">Lets <em>Create</em> time series graphs of all ISP customer reviews against all the 6 KPIs and see how they fair against time</li>
-                <li class="list-group-item">Lets <em>Analyse</em>-Show number of users with more that 1 ISP and why certain users prefer certain ISPs and a whole lot of adHoc reports</li>
-                <li class="list-group-item">Lets <em>Help</em> prospective users choose the right ISP based on user experience ,no guessing</li>
+                <li class="list-group-item">Lets <em>Analyse</em>-Why do certain users prefer certain ISPs?... and a whole lot of adHoc reports</li>
+                <li class="list-group-item">Lets <em>Share</em> with the community and help prospective users choose the right ISP based on user experience ,no guessing</li>
             </ul>
         </div>
     {% endif %}
@@ -126,27 +133,27 @@
                                     <table class="table">
                                         <tr>
                                             <td>
-                                                <span class="glyphicon glyphicon-pencil text-primary"></span><a
+                                                <span class="glyphicon glyphicon-file text-info"></span><a
                                                     href="{{ url_for('dashboard') }}">Dashboard</a>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <span class="glyphicon glyphicon-pencil text-primary"></span><a
-                                                    href="{{ url_for('rate_isp') }}">Rate your ISP</a>
+                                                    href="{{ url_for('rate_isp') }}">Rate ISP</a>
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td>
-                                                <span class="glyphicon glyphicon-flash text-success"></span><a
+                                                <span class="glyphicon glyphicon-file text-info"></span><a
                                                     href="{{ url_for('view_my_isp_ratings') }}">My ISP Ratings</a>
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td>
-                                                <span class="glyphicon glyphicon-flash text-success"></span><a
+                                                <span class="glyphicon glyphicon-file text-info"></span><a
                                                     href="{{ url_for('view_overall_isp_ratings') }}">Overall ISP
                                                 Ratings</a>
                                             </td>
@@ -170,12 +177,12 @@
                                         <tr>
                                             <td>
                                                 <span class="glyphicon glyphicon-pencil text-primary"></span><a
-                                                    href="{{ url_for('rate_service') }}">Rate Service</a>
+                                                    href="{{ url_for('rate_service') }}">Rate ISP Service</a>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <span class="glyphicon glyphicon-flash text-success"></span><a
+                                                <span class="glyphicon glyphicon-file text-info"></span><a
                                                     href="{{ url_for('view_my_service_ratings') }}">My Service
                                                 Ratings</a>
                                             </td>
@@ -246,7 +253,7 @@
                                 <h4 class="panel-title">
                                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span
                                             class="glyphicon glyphicon-file">
-                            </span>Reports</a>
+                            </span>AdHoc Reports</a>
                                 </h4>
                             </div>
                             <div id="collapseFour" class="panel-collapse collapse">

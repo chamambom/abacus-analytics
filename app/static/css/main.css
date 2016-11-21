@@ -30,13 +30,14 @@ body {
 
 .navbar-default .navbar-brand {
     color: #fff;
-    font-weight: bold;
-}
+    font-weight: 500;
+    padding: 5px  15px 5px 15px;
+    }
 
 .navbar-default .navbar-nav > li > a {
     color: #fff;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .navbar-header > .navbar-brand {
@@ -89,10 +90,10 @@ em{
 }
 
 .page-header {
-    border: 1px solid #eee;
+    border: 1px solid #e6e6e6;
     margin: 4px 0px 4px 0px;
     padding: 4px;
-    background-color: #F5F3EE;
+    background-color: #eee;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
@@ -106,7 +107,7 @@ em{
 
 .navbar-header > .navbar-brand {
     float: left;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .img-circle {
@@ -164,6 +165,22 @@ em{
     /*color: #000;
     font-weight: 500;*/
 }
+.ourstory{
+    padding:5px;
+    margin: 8px;
+    font-weight: 200;
+    font-size: 15px;
+    color: #666;
+   }
+
+.dropdown-header {
+    color: #ff851b;
+    display: block;
+    line-height: 1.42857;
+    padding: 3px 20px;
+    white-space: nowrap;
+    font-size: 14px;
+}
 
 .panel {
     margin-bottom: 5px;
@@ -206,6 +223,11 @@ em{
 .h5, h5 {
     color:  #FF851B  ;
     font-weight: 600;
+    font-size: 16px;
+}
+
+.panel-title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > small, .panel-title > small > a {
+    color:  #FF851B  ;
 }
 
 .form-group {
