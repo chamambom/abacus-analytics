@@ -79,6 +79,7 @@ def rate_isp():
         kpi_rating_comment = request.form['kpi_rating_comment']
         if not kpi_id:
             flash('KPI is required', 'danger')
+            return render_template('rate_isp.html')
         elif not isp_id:
             flash('ISP is required', 'danger')
             return render_template('rate_isp.html')
@@ -103,7 +104,7 @@ def rate_isp():
                 db.session.add(user_ratings)
                 db.session.commit()
                 flash('Data successfully Added', 'success')
-        return render_template('view_my_isp_ratings.html')
+                return redirect(url_for('view_my_isp_ratings'))
 
 
 @application.route('/view_my_isp_ratings', methods=['GET', 'POST'])
@@ -275,7 +276,7 @@ def register():
             current_user = newuser.email
 
             if current_user:
-                return redirect(url_for('welcome'))
+                return redirect(url_for('dashboard'))
     elif request.method == 'GET':
         return render_template('register.html', form=form)
 

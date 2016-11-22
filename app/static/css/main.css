@@ -37,7 +37,7 @@ body {
 .navbar-default .navbar-nav > li > a {
     color: #fff;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .navbar-header > .navbar-brand {
@@ -216,7 +216,7 @@ em{
 
 .h4, h4, .nav > li {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     color: #FF851B ;
 }
 
