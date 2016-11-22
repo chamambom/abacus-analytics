@@ -27,9 +27,10 @@ def current_subscribed_isp_service():
         checkbox_values = request.form.getlist('service_name')
         # checkbox_values = dict((key, request.form.getlist(key)) for key in request.form.keys())
         print(checkbox_values)
-        for k in checkbox_values:
-            #user_subscribed_services = isp_service(kpi_id, isp_id, ratings_value, kpi_rating_comment)
-            print k
+        # test elements in the list
+        mysize=len(checkbox_values)
+        print(mysize)
+            #user_subscribed_services = isp_service(kpi_id, isp_id, ratings_value, kpi_rating_comment
         return render_template('mytest.html', checkbox_values=checkbox_values)
         # response = "Form Contents <pre>%s</pre>" % "<br/>\n".join(["%s:%s" % item for item in formData.items(multi=True)])
 

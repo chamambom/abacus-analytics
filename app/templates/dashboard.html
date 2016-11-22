@@ -16,7 +16,7 @@
                             {% for service in services_entries %}
                                 <div class="checkbox">
                                     <input type="checkbox" name="service_name"
-                                           value="({{ isp.isp_name }},{{ service.service_name }})">{{ service.service_name }}
+                                           value="('{{ isp.isp_name }}','{{ service.service_name }}')">{{ service.service_name }}
                                 </div>
                             {% else %}
                                 <li><em>No entries here so far</em></li>

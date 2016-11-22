@@ -1,0 +1,21 @@
+Having pools of big data to dive into doesn't change the basic tenets of analytical modeling for predictive analytics and data mining,
+Patterns and relationships hidden in sets of big data typically can be found by looking at representative samples of the available information,
+without having to comb through it all.
+
+"I don't tend to end up using very much data [in analytical models]," Berry said. "Patterns reveal themselves pretty quickly.
+And when you have enough data to spot a pattern, the results don't change if you add more data." Often, he added, he gets better
+answers on analytical queries " if I look at less data in a shorter time than I do if I spend more time and look at more data."
+
+
+"Sampling is a powerful thing," agreed Karl Rexer, president of consulting services company Rexer Analytics in Winchester, Mass.
+In developing an analytical model to predict potential customer churn, an analytics team at a large company might have access to millions
+ of records on hundreds of thousands of customers."But," Rexer said, "do you need to use all that data? A lot of times, the answer is no."
+
+starts with only about 5,000 data records when he builds predictive models for clients, even if much more information is there for the taking.
+
+Throwing more data at analytical models without proper attention to sampling might make them less accurate by adding "noise" to the equation.
+
+Builds its predictive models around sample data sets, not the entire data vault.
+
+
+
