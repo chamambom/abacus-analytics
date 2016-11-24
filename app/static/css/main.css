@@ -54,6 +54,13 @@ body {
 
 }
 
+    /*
+    Below is the grouping for the
+    */
+
+.list-group-item.disabled, .list-group-item.disabled:focus, .list-group-item.disabled:hover {
+    background-color: #f5f5f5;
+ }
 /*########### below is the tabbed navigation when you loggin ############*/
 .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
     background-color: #eee;
@@ -93,7 +100,7 @@ em{
     border: 1px solid #e6e6e6;
     margin: 4px 0px 4px 0px;
     padding: 4px;
-    background-color: #eee;
+    background-color: #f5f5f5;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
@@ -227,7 +234,7 @@ em{
 }
 
 .panel-title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > small, .panel-title > small > a {
-    color:  #FF851B  ;
+    color:  #666 ;
 }
 
 .form-group {

@@ -17,5 +17,18 @@ Throwing more data at analytical models without proper attention to sampling mig
 
 Builds its predictive models around sample data sets, not the entire data vault.
 
+Links that really helped me
+
+http://ergo.io/tutorials/persuading-wtforms/persuading-wtforms-to-generate-checkboxes/
+http://stackoverflow.com/questions/25668092/flask-sqlalchemy-many-to-many-insert-data
+http://www.ergo.io/blog/sqlalchemy-relationships-from-beginner-to-advanced/
+http://pythoncentral.io/series/python-sqlalchemy-database-tutorial/
+http://en.stack.aiseen.org/questions/27821239/select-many-to-many-with-flask-sqlalchemy
+http://librelist.com/browser/flask/2011/11/12/sqlalchemy-add-method-for-many-to-many-relationship/#068423c8092c2154ccfe08268711ec03
+https://codeseekah.com/2013/08/04/flask-admin-hacks-for-many-to-many-relationships/
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-viii-followers-contacts-and-friends
+https://009co.com/?p=240
+https://www.reddit.com/r/flask/comments/3s9c2d/af_struggling_with_many_to_many_association_model/
+http://xsnippet.org/359350/
 
 

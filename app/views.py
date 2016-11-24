@@ -2,8 +2,10 @@ from flask import request, redirect, url_for, render_template, flash, render_tem
 from flask_login import login_required, login_user, logout_user, current_user
 from sqlalchemy import func
 from app.forms import SignupForm, LoginForm, MultipleCheckBoxes
-from app.models import User, Services, Service_metric_ratings, Ratings, Kpis, Kpi_ratings, Isps, Service_metric ,isp_service
+from app.models import User, Services, Service_metric_ratings, Ratings, Kpis, Kpi_ratings, Isps, Service_metric, \
+    Isp_service
 from app import application, db, mail, Message
+import pygal
 
 
 @application.route('/')
@@ -11,28 +13,58 @@ def index():
     return render_template('home.html')
 
 
-@application.route('/dashboard')
+@application.route('/add_your_subscribed_isp_services')
 @login_required
-def dashboard():
-    return render_template('dashboard.html')
+def add_your_subscribed_isp_services():
+    return render_template('add_your_subscribed_isp_services.html')
 
 
 @application.route('/current_subscribed_isp_service', methods=['GET', 'POST'])
 @login_required
 def current_subscribed_isp_service():
-    # formData = request.values if request.method == "GET" else request.values
-    # checkbox_values = formData.items(multi=True)
-    # print(checkbox_values)
     if request.method == 'POST':
         checkbox_values = request.form.getlist('service_name')
-        # checkbox_values = dict((key, request.form.getlist(key)) for key in request.form.keys())
-        print(checkbox_values)
-        # test elements in the list
-        mysize=len(checkbox_values)
-        print(mysize)
-            #user_subscribed_services = isp_service(kpi_id, isp_id, ratings_value, kpi_rating_comment
-        return render_template('mytest.html', checkbox_values=checkbox_values)
-        # response = "Form Contents <pre>%s</pre>" % "<br/>\n".join(["%s:%s" % item for item in formData.items(multi=True)])
+        # checkbox_values = dict((key, request.form.getlist(key)) for key in request.form.keys()
+        for elem in checkbox_values:
+            values = eval(elem) + (current_user.user_id,)
+            isp_id = values[0]
+            service_id = values[1]
+            user_id = values[2]
+
+            exists = db.session.query(Isp_service.user_id, Isp_service.isp_id, Isp_service.user_id) \
+                .filter(Isp_service.isp_id == isp_id, Isp_service.service_id == service_id,
+                        Isp_service.user_id == user_id) \
+                .filter_by(user_id=current_user.user_id).count()
+
+            if exists:
+                flash('You have already added this data', 'danger')
+                return render_template('add_your_subscribed_isp_services.html')
+            else:
+                user_isp_subscribed_services = Isp_service(isp_id, service_id, user_id)
+                db.session.add(user_isp_subscribed_services)
+                db.session.commit()
+        flash('Data successfully Added', 'success')
+        return redirect(url_for('view_my_isp_service_subscriptions'))
+    else:
+        return render_template('add_your_subscribed_isp_services.html')
+
+
+@application.route('/view_my_isp_service_subscriptions', methods=['GET', 'POST'])
+@login_required
+def view_my_isp_service_subscriptions():
+    # my_service_ratings = Service_metric_ratings.query.filter_by(user_id=g.user.user_id).order_by(
+    # Service_metric_ratings.pub_date.desc()).all()
+    view_my_isp_service_subscriptions = db.session.query(User.email, Isps.isp_name, Services.service_name) \
+        .filter(Isp_service.user_id == User.user_id) \
+        .filter(Isp_service.isp_id == Isps.isp_id) \
+        .filter(Isp_service.service_id == Services.service_id) \
+        .filter_by(user_id=current_user.user_id)
+
+    # for i in view_my_isp_service_subscriptions:
+    # print i.isp_name
+
+    return render_template('view_my_isp_service_subscriptions.html',
+                           view_my_isp_service_subscriptions=view_my_isp_service_subscriptions)
 
 
 @application.route('/check')
@@ -155,10 +187,18 @@ def view_overall_isp_ratings():
         # print(i.isp_name, i.service_name, i.metric_name, (round(i.avg_of_ratings)))
         # ratings_table_values = Ratings.query.filter_by(rating_value=(round(i.avg_of_ratings)))
 
+        # below is the charting
+
+        bar_chart = pygal.HorizontalStackedBar()
+        bar_chart.title = "Remarquable sequences"
+        bar_chart.x_labels = map(str, range(11))
+        bar_chart.add('Fibonacci', [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55])
+        bar_chart.add('Padovan', [1, 1, 1, 2, 2, 3, 4, 5, 7, 9, 12])
+        chart = bar_chart.render(is_unicode=True)
 
         return render_template('view_overall_isp_ratings.html',
                                view_overall_isp_ratings=view_overall_isp_ratings,
-                               ratings_table_values=ratings_table_values)
+                               ratings_table_values=ratings_table_values, chart=chart)
 
 
 @application.route('/rate_service', methods=['GET', 'POST'])
@@ -295,7 +335,7 @@ def login():
                 login_user(user)
                 # print('Thanks for logging in, {}'.format(current_user.email))
                 next = request.args.get('next')
-                return redirect(next or url_for("dashboard"))
+                return redirect(next or url_for("add_your_subscribed_isp_services"))
             else:
                 flash('ERROR! Incorrect login credentials.', 'danger')
         except:

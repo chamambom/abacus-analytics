@@ -18,6 +18,9 @@ class User(UserMixin, db.Model):
     kpi_ratings = db.relationship('Kpi_ratings', backref="user", cascade="all, delete-orphan",
                                   lazy='dynamic')
 
+    isp_service = db.relationship('Isp_service', backref="user", cascade="all, delete-orphan",
+                                  lazy='dynamic')
+
     def __init__(self, email, password):
         self.set_password(password)
         self.email = email
@@ -54,9 +57,6 @@ class Isps(db.Model):
     isp_name = db.Column('isp_name', db.String(80), unique=True)
     isp_description = db.Column('isp_description', db.String(180))
 
-    # services = db.relationship('Services', backref="isps", cascade="all, delete-orphan",lazy='dynamic')
-
-
     def __init__(self, isp_name, isp_description):
         self.isp_name = isp_name
         self.isp_description = isp_description
@@ -65,11 +65,20 @@ class Isps(db.Model):
         return '<Isps %r>' % self.isp_name
 
 
-isp_service = db.Table('isp_service',
-                       db.Column('isp_id', db.Integer, db.ForeignKey('isps.isp_id')),
-                       db.Column('user_id', db.Integer, db.ForeignKey('user.user_id')),
-                       db.Column('service_id', db.Integer, db.ForeignKey('services.service_id'))
-                       )
+class Isp_service(db.Model):
+    __tablename__ = "isp_service"
+    isp_service_id = db.Column('isp_service_id', db.Integer, primary_key=True)
+    isp_id = db.Column('isp_id', db.Integer, db.ForeignKey('isps.isp_id'))
+    service_id = db.Column('service_id', db.Integer, db.ForeignKey('services.service_id'))
+    user_id = db.Column('user_id', db.Integer, db.ForeignKey('users.user_id'))
+
+    def __init__(self, isp_id, service_id, user_id):
+        self.isp_id = isp_id
+        self.service_id = service_id
+        self.user_id = user_id
+
+def __repr__(self):
+    return '<Isp_service %r>' % self.isp_service_id
 
 
 class Services(db.Model):
@@ -78,7 +87,6 @@ class Services(db.Model):
     service_name = db.Column('service_name', db.String(80), unique=True)
     # Defining the Foreign Key on the Child Table
     service_catergory_id = db.Column(db.Integer, db.ForeignKey('service_catergory.service_catergory_id'))
-    # isp_id = db.Column(db.Integer, db.ForeignKey('Isps.isp_id'))
 
     def __init__(self, service_name):
         self.service_name = service_name

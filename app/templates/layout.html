@@ -131,16 +131,23 @@
                             <div id="collapseOne" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     <table class="table">
+
                                         <tr>
                                             <td>
                                                 <span class="glyphicon glyphicon-file text-info"></span><a
-                                                    href="{{ url_for('dashboard') }}">Dashboard</a>
+                                                    href="{{ url_for('view_my_isp_service_subscriptions') }}">My Subscribed ISPs and Services</a>
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td>
+                                                <span class="glyphicon glyphicon-file text-info"></span><a
+                                                    href="{{ url_for('add_your_subscribed_isp_services') }}">Add your currently subscribed ISP and Services</a>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <span class="glyphicon glyphicon-pencil text-primary"></span><a
-                                                    href="{{ url_for('rate_isp') }}">Rate ISP</a>
+                                                    href="{{ url_for('rate_isp') }}">Rate any ISP that you have used or using</a>
                                             </td>
                                         </tr>
 
