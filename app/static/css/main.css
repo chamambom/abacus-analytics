@@ -277,7 +277,13 @@ ol, ul {
 }
 
 b, strong {
-    font-size: 18px;
-    color: #ed1c24;
+    font-size: 16px;
+
+}
+
+th{
+    font-size: 16px;
+    color: #ff851b;
+    font-weight:500;
 }
 

@@ -20,7 +20,7 @@
          <th>KPI</th>
          <th># of users who Rated</th>
          <th>Sum of Ratings for all user(s)</th>
-         <th>Average QOS Score</th>
+         <th>Reputation Score</th>
          <th>Rating Verdict</th>
        </tr>
    </thead>
@@ -29,13 +29,13 @@
       <tr>
       {% for i in view_overall_isp_ratings %}
       <td>{{ i.isp_name }}</td>
-      <td>{{ i.kpi_name }}</td>
+      <td><strong>{{ i.kpi_name }}</strong></td>
       <td>{{ i.count_of_users }}</td>
       <td>{{ i.sum_of_ratings }}</td>
       <td>{{ i.avg_of_ratings|round|int }}</td>
              {% for m in ratings_table_values %}
                 {% if (m.ratings_value) ==(i.avg_of_ratings|round|int)%}
-                     <td>{{ m.ratings_comment}}</td>
+                     <td><strong>{{ m.ratings_comment}}</strong></td>
                 {% endif %}
              {% endfor %}
       </tr>
@@ -47,6 +47,8 @@
    </table>
 
 
-    {{chart|safe}}
+    {{Overall_isp_ratings_graph_data|safe}}
+      <p>Below is a test graph that i  need to incorporate in my design</p>
+    <embed type="image/svg+xml" src={{graph_data|safe}} style='max-width:1000px'/>
 
   {% endblock %}

@@ -187,18 +187,38 @@ def view_overall_isp_ratings():
         # print(i.isp_name, i.service_name, i.metric_name, (round(i.avg_of_ratings)))
         # ratings_table_values = Ratings.query.filter_by(rating_value=(round(i.avg_of_ratings)))
 
-        # below is the charting
 
-        bar_chart = pygal.HorizontalStackedBar()
-        bar_chart.title = "Remarquable sequences"
-        bar_chart.x_labels = map(str, range(11))
-        bar_chart.add('Fibonacci', [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55])
-        bar_chart.add('Padovan', [1, 1, 1, 2, 2, 3, 4, 5, 7, 9, 12])
-        chart = bar_chart.render(is_unicode=True)
+        # below is the charting
+        avg_ratings = ([int(round(i.avg_of_ratings)) for i in view_overall_isp_ratings])
+        isps = ([i.isp_name for i in view_overall_isp_ratings])
+        kpi = ([i.kpi_name for i in view_overall_isp_ratings])
+
+        from pygal.style import DefaultStyle
+        bar_chart = pygal.Bar(range=(0, 5), print_values=True, style=DefaultStyle(
+            value_font_family='googlefont:Raleway',
+            label_font_size=18,
+            tooltip_font_size=20,
+            colors=('#ff851b', '#E8537A', '#E95355', '#E87653', '#E89B53'),
+            value_font_size=30,
+            value_colors=('white',)))
+        bar_chart.title = "ISP Average Scores for KPI=" + kpi[0]
+        bar_chart.x_labels = isps
+        bar_chart.add('R-Score', avg_ratings)
+        Overall_isp_ratings_graph_data = bar_chart.render(is_unicode=True)
+
+        graph = pygal.Line()
+        graph.title = '% Change Coolness of programming languages over time.'
+        graph.x_labels = ['2011', '2012', '2013', '2014', '2015', '2016']
+        graph.add('Python', [15, 31, 89, 200, 356, 900])
+        graph.add('Java', [15, 45, 76, 80, 91, 95])
+        graph.add('C++', [5, 51, 54, 102, 150, 201])
+        graph.add('All others combined!', [5, 15, 21, 55, 92, 105])
+        graph_data = graph.render_data_uri()
 
         return render_template('view_overall_isp_ratings.html',
                                view_overall_isp_ratings=view_overall_isp_ratings,
-                               ratings_table_values=ratings_table_values, chart=chart)
+                               ratings_table_values=ratings_table_values, graph_data=graph_data
+                               , Overall_isp_ratings_graph_data=Overall_isp_ratings_graph_data)
 
 
 @application.route('/rate_service', methods=['GET', 'POST'])
