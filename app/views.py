@@ -192,6 +192,8 @@ def view_overall_isp_ratings():
         avg_ratings = ([int(round(i.avg_of_ratings)) for i in view_overall_isp_ratings])
         isps = ([i.isp_name for i in view_overall_isp_ratings])
         kpi = ([i.kpi_name for i in view_overall_isp_ratings])
+        rating_verdict = ([i.ratings_comment for i in ratings_table_values])
+        print(rating_verdict)
 
         from pygal.style import DefaultStyle
         bar_chart = pygal.Bar(range=(0, 5), print_values=True, style=DefaultStyle(
@@ -203,6 +205,7 @@ def view_overall_isp_ratings():
             value_colors=('white',)))
         bar_chart.title = "ISP Average Scores for KPI=" + kpi[0]
         bar_chart.x_labels = isps
+        #bar_chart.y_labels = rating_verdict
         bar_chart.add('R-Score', avg_ratings)
         Overall_isp_ratings_graph_data = bar_chart.render(is_unicode=True)
 
