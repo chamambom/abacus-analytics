@@ -155,10 +155,36 @@ def view_my_isp_ratings():
         .filter_by(user_id=current_user.user_id) \
         .order_by(Kpi_ratings.pub_date.desc()).all()
 
+    # below is the charting
+    isps = ([i.isp_name for i in view_my_isp_ratings])
+    kpi = ([i.kpi_name for i in view_my_isp_ratings])
+    ratings_value = ([int(round(i.ratings_value)) for i in view_my_isp_ratings])
+
+
+    from pygal.style import DefaultStyle
+    bar_chart = pygal.Bar(range=(0, 5), print_values=True, style=DefaultStyle(
+        value_font_family='googlefont:Raleway',
+        label_font_size=18,
+        legend_font_size=20,
+        tooltip_font_size=20,
+        major_label_font_size=20,
+        value_label_font_size=20,
+        colors=('#ff851b', '#E8537A', '#E95355', '#E87653', '#E89B53'),
+        value_font_size=30,
+        value_colors=('white',)))
+
+    bar_chart.title = "ISP Reputation Scores for KPI "
+    bar_chart.x_labels = isps
+    bar_chart.y_labels = kpi
+    bar_chart.add('R-Score', ratings_value)
+    my_isp_ratings_graph_data = bar_chart.render(is_unicode=True)
+
+
     # for i in my_service_ratings:
     # print i.Isps.isp_name
 
-    return render_template('view_my_isp_ratings.html', view_my_isp_ratings=view_my_isp_ratings)
+    return render_template('view_my_isp_ratings.html', view_my_isp_ratings=view_my_isp_ratings,
+                           my_isp_ratings_graph_data=my_isp_ratings_graph_data)
 
 
 @application.route('/view_overall_isp_ratings', methods=['GET', 'POST'])
@@ -192,20 +218,22 @@ def view_overall_isp_ratings():
         avg_ratings = ([int(round(i.avg_of_ratings)) for i in view_overall_isp_ratings])
         isps = ([i.isp_name for i in view_overall_isp_ratings])
         kpi = ([i.kpi_name for i in view_overall_isp_ratings])
-        rating_verdict = ([i.ratings_comment for i in ratings_table_values])
-        print(rating_verdict)
+        rating_verdict = [''] + ([i.ratings_comment for i in ratings_table_values])
 
         from pygal.style import DefaultStyle
         bar_chart = pygal.Bar(range=(0, 5), print_values=True, style=DefaultStyle(
             value_font_family='googlefont:Raleway',
             label_font_size=18,
+            legend_font_size=20,
             tooltip_font_size=20,
+            major_label_font_size=20,
+            value_label_font_size=20,
             colors=('#ff851b', '#E8537A', '#E95355', '#E87653', '#E89B53'),
             value_font_size=30,
             value_colors=('white',)))
-        bar_chart.title = "ISP Average Scores for KPI=" + kpi[0]
+        bar_chart.title = "ISP Reputation Scores for KPI " + kpi[0]
         bar_chart.x_labels = isps
-        #bar_chart.y_labels = rating_verdict
+        bar_chart.y_labels = rating_verdict
         bar_chart.add('R-Score', avg_ratings)
         Overall_isp_ratings_graph_data = bar_chart.render(is_unicode=True)
 

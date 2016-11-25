@@ -11,8 +11,6 @@
          <th>Rating Comment</th>
          <th>Kpi Rating Comment</th>
          <th>Pub Date</th>
-
-
       </tr>
    </thead>
 
@@ -32,10 +30,9 @@
       </tr>
 
    {% endfor %}
-
-
-
    </tbody>
-
 </table>
+
+    {{my_isp_ratings_graph_data | safe}}
+
 {% endblock %}
