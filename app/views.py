@@ -175,7 +175,7 @@ def view_my_isp_ratings():
 
     bar_chart.title = "ISP Reputation Scores for KPI "
     bar_chart.x_labels = isps
-    bar_chart.y_labels = kpi
+    #bar_chart.x_labels = kpi
     bar_chart.add('R-Score', ratings_value)
     my_isp_ratings_graph_data = bar_chart.render(is_unicode=True)
 
@@ -237,6 +237,14 @@ def view_overall_isp_ratings():
         bar_chart.add('R-Score', avg_ratings)
         Overall_isp_ratings_graph_data = bar_chart.render(is_unicode=True)
 
+        pie_chart = pygal.Pie()
+        pie_chart.title = 'Browser usage in February 2012 (in %)'
+        pie_chart.add('Chrome', 36.3)
+        pie_chart.add('Safari', 4.5)
+        pie_chart.add('Opera', 2.3)
+        Overall_isp_ratings_pie_graph_data = pie_chart.render(is_unicode=True)
+
+
         graph = pygal.Line()
         graph.title = '% Change Coolness of programming languages over time.'
         graph.x_labels = ['2011', '2012', '2013', '2014', '2015', '2016']
@@ -249,7 +257,8 @@ def view_overall_isp_ratings():
         return render_template('view_overall_isp_ratings.html',
                                view_overall_isp_ratings=view_overall_isp_ratings,
                                ratings_table_values=ratings_table_values, graph_data=graph_data
-                               , Overall_isp_ratings_graph_data=Overall_isp_ratings_graph_data)
+                               , Overall_isp_ratings_graph_data=Overall_isp_ratings_graph_data
+                               ,Overall_isp_ratings_pie_graph_data=Overall_isp_ratings_pie_graph_data)
 
 
 @application.route('/rate_service', methods=['GET', 'POST'])
