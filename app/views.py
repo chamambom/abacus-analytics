@@ -25,6 +25,9 @@ def current_subscribed_isp_service():
     if request.method == 'POST':
         checkbox_values = request.form.getlist('service_name')
         # checkbox_values = dict((key, request.form.getlist(key)) for key in request.form.keys()
+        if not checkbox_values:
+            flash('You need to select at least subscribed service', 'danger')
+            return render_template('add_your_subscribed_isp_services.html')
         for elem in checkbox_values:
             values = eval(elem) + (current_user.user_id,)
             isp_id = values[0]

@@ -14,32 +14,36 @@
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>#}
-    <div class="user_access_">
 
-        <form action="" method=post class="form-signin" name="login">
+    <ul class="list-group">
+        <li class="list-group-item disabled"><h5>Welcome {{ current_user.email }}</h5></li>
 
-            {{ form.hidden_tag() }}
-            <h4 class="form-signin-heading">Login</h4>
+        <li class="list-group-item">
 
-            <label for="inputEmail" class="sr-only">Email Address</label>
-            {% for message in form.email.errors %}
-                <div class="test">{{ message }}</div>
-            {% endfor %}
-            <input type="email" id="inputEmail" name="email" class="form-control" value="{{ request.form.email }}">
+            <form action="" method=post class="form-signin" name="login">
 
+                {{ form.hidden_tag() }}
+                <h4 class="form-signin-heading">Login</h4>
 
-            <label for="inputPassword" class="sr-only">Password</label>
-            {% for message in form.password.errors %}
-                <div class="test">{{ message }}</div>
-            {% endfor %}
-            <input type="password" id="inputPassword" name="password" class="form-control"
-                   value="{{ request.form.password }}">
-
-            <button class="btn btn-lg btn-primary btn-block">{{ form.submit }}</button>
-        </form>
+                <label for="inputEmail" class="sr-only">Email Address</label>
+                {% for message in form.email.errors %}
+                    <div class="test">{{ message }}</div>
+                {% endfor %}
+                <input type="email" id="inputEmail" name="email" class="form-control" value="{{ request.form.email }}">
 
 
-        <div class="facebook_login">
+                <label for="inputPassword" class="sr-only">Password</label>
+                {% for message in form.password.errors %}
+                    <div class="test">{{ message }}</div>
+                {% endfor %}
+                <input type="password" id="inputPassword" name="password" class="form-control"
+                       value="{{ request.form.password }}">
+
+                <button class="btn btn-lg btn-primary btn-block">{{ form.submit }}</button>
+            </form>
+
+
+            <div class="facebook_login">
 
                 {% if not session.logged_in %}
                     <a href="/facebook_login">Facebook Login</a>
@@ -47,9 +51,13 @@
                     <a href="/logout">Logout</a>
                 {% endif %}
 
-        </div>
+            </div>
 
-    </div>
+
+        </li>
+
+
+    </ul>
 
     {#<form action="" method="POST" name="login">
     {{ form.hidden_tag() }}
