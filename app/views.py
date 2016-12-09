@@ -34,13 +34,13 @@ def current_subscribed_isp_service():
             service_id = values[1]
             user_id = values[2]
 
-            exists = db.session.query(Isp_service.user_id, Isp_service.isp_id, Isp_service.user_id) \
+            exists = db.session.query(Isp_service.user_id, Isp_service.isp_id, Isp_service.service_id) \
                 .filter(Isp_service.isp_id == isp_id, Isp_service.service_id == service_id,
                         Isp_service.user_id == user_id) \
                 .filter_by(user_id=current_user.user_id).count()
 
             if exists:
-                flash('You have already added this data', 'danger')
+                flash('You have already added this service', 'danger')
                 return render_template('add_your_subscribed_isp_services.html')
             else:
                 user_isp_subscribed_services = Isp_service(isp_id, service_id, user_id)
