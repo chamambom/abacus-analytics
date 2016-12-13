@@ -194,12 +194,10 @@ em{
     margin-bottom: 5px;
 }
 
-.panel-body {
-    padding: 5px;
-}
+
 
 .panel-group {
-    margin: 1px 0px 2px -14px;
+    margin: 1px 14px 2px -14px;
     border: 0px solid #f2f3f4 ;
 }
 
