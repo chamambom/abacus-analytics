@@ -40,7 +40,7 @@ class LoginForm(FlaskForm):
     email = StringField("Email", [validators.DataRequired("Please enter your email address."),
                                   validators.Email("Please enter your email address.")])
     password = PasswordField('Password', [validators.DataRequired("Please enter a password.")])
-    submit = SubmitField("Sign In")
+    submit = SubmitField("Log In")
 
 
 data = [('value_a', 'Value A'), ('value_b', 'Value B'), ('value_c', 'Value C')]

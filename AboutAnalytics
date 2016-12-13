@@ -20,6 +20,7 @@ Builds its predictive models around sample data sets, not the entire data vault.
 Links that really helped me
 
 http://ergo.io/tutorials/persuading-wtforms/persuading-wtforms-to-generate-checkboxes/
+http://www.ergo.io/blog/better-pagination-in-flask/
 http://stackoverflow.com/questions/25668092/flask-sqlalchemy-many-to-many-insert-data
 http://www.ergo.io/blog/sqlalchemy-relationships-from-beginner-to-advanced/
 http://pythoncentral.io/series/python-sqlalchemy-database-tutorial/
@@ -34,5 +35,6 @@ http://www.pygal.org/en/stable/documentation/first_steps.html
 http://blog.teamtreehouse.com/python-single-line-loops
 http://line25.com/articles/10-html-tag-crimes-you-really-shouldnt-commit
 http://www.blog.pythonlibrary.org/2015/04/16/using-pygal-graphs-in-flask/
-
+https://blackrockdigital.github.io/startbootstrap-shop-homepage/
+http://www.kodeinfo.com/post/bootstrap-login-form
 

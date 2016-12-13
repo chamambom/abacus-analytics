@@ -1,38 +1,40 @@
 {% extends "layout.html" %}
 {% block body %}
+    <ul class="list-group">
+        <li class="list-group-item disabled"><h5>Welcome {{ current_user.email }}</h5></li>
+        <li class="list-group-item">Below are your ISP-KPI ratings </li>
+    </ul>
+    <table class="table table-condensed table-hover">
+        <thead class="thead-custom">
+        <tr>
+            <th>ISP</th>
+            <th>KPI</th>
+            <th>Rating</th>
+            <th>Rating Comment</th>
+            <th>Kpi Rating Comment</th>
+            <th>Pub Date</th>
+        </tr>
+        </thead>
 
-<table class="table table-striped table-bordered table-hover">
+        <tbody>
+        {% for i in view_my_isp_ratings %}
+            <tr>
+                <td>{{ i.isp_name }}</td>
+                <td>{{ i.kpi_name }}</td>
+                <td>{{ i.ratings_value }}</td>
+                <td>{{ i.ratings_comment }}</td>
+                <td>{{ i.kpi_rating_comment }}</td>
+                <td>{{ i.pub_date }}</td>
 
-   <thead>
-      <tr>
-         <th>ISP</th>
-         <th>KPI</th>
-         <th>Rating</th>
-         <th>Rating Comment</th>
-         <th>Kpi Rating Comment</th>
-         <th>Pub Date</th>
-      </tr>
-   </thead>
+                {% else %}
+                <td colspan="7"><em>No entries here so far</em></td>
+                {# <a href="{{ url_for('rate_isp_service') }}" class="btn btn-large btn-primary">Place New Service Ratings</a>#}
+            </tr>
 
-   <tbody>
-   {% for i in view_my_isp_ratings %}
-      <tr>
-      <td>{{ i.isp_name }}</td>
-      <td>{{ i.kpi_name }}</td>
-      <td>{{ i.ratings_value}}</td>
-      <td>{{ i.ratings_comment}}</td>
-      <td>{{ i.kpi_rating_comment}}</td>
-      <td>{{ i.pub_date}}</td>
+        {% endfor %}
+        </tbody>
+    </table>
 
-      {% else %}
-      <td colspan="7"><em>No entries here so far</em></td>
-      {# <a href="{{ url_for('rate_isp_service') }}" class="btn btn-large btn-primary">Place New Service Ratings</a>#}
-      </tr>
-
-   {% endfor %}
-   </tbody>
-</table>
-
-    {{my_isp_ratings_graph_data | safe}}
+    {{ my_isp_ratings_graph_data | safe }}
 
 {% endblock %}

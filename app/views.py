@@ -40,7 +40,7 @@ def current_subscribed_isp_service():
                 .filter_by(user_id=current_user.user_id).count()
 
             if exists:
-                flash('You have already added this service', 'danger')
+                flash('You have already added that ISP and service ', 'danger')
                 return render_template('add_your_subscribed_isp_services.html')
             else:
                 user_isp_subscribed_services = Isp_service(isp_id, service_id, user_id)
@@ -398,7 +398,7 @@ def login():
                 login_user(user)
                 # print('Thanks for logging in, {}'.format(current_user.email))
                 next = request.args.get('next')
-                return redirect(next or url_for("add_your_subscribed_isp_services"))
+                return redirect(next or url_for("view_my_isp_service_subscriptions"))
             else:
                 flash('ERROR! Incorrect login credentials.', 'danger')
         except:
