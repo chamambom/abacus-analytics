@@ -1,5 +1,5 @@
 body {
-    color: #666;
+    color: #365899;
     font-family: "FontAwesome", calibri, sans-serif ,Geomanist ,Helvetica;
     font-size: 14px;
     line-height: 1.42857;
@@ -65,11 +65,6 @@ body {
 .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
     background-color: #eee;
     color: #e10019;
-}
-
-a {
-    color: #999;
-
 }
 
 em{
@@ -223,9 +218,9 @@ em{
 }
 
 .h4, h4, .nav > li {
-    font-size: 16px;
-    font-weight: 600;
-    color: #FF851B ;
+    font-size: 15px;
+    font-weight: 500;
+    color: #000;
 }
 
 .h5, h5 {
@@ -306,7 +301,7 @@ th{
     background-color: #fff;
     border: 1px solid #f2f3f4;
     padding: 0px;
-    color: #666;
+    color: #365899;
 
 }
 
@@ -322,6 +317,7 @@ th{
 
 .thumbnail .caption {
     padding: 2px;
+    color: #365899;
 }
 
 #loginform{
