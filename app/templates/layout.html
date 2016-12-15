@@ -63,11 +63,15 @@
                     <ul class="dropdown-menu">
                         <li class="ourstory">
                             This site is about Data analytics (Trending, Predictive, Comparative)
-                            in the ISP space.With time, we will be able to build Predictive models that can be used by anyone.
+                            in the ISP space.With time, we will be able to build Predictive models that can be used by
+                            anyone.
                             <p></p>
-                            Over time we have seen a proliferation of ISPs in Zimbabwe yet there is no information regarding
-                            currently subscribed user experiences.We are simply giving the internet community a platform to
-                            give us that data and help all prospective subscribers/customers/users make informed decisions
+                            Over time we have seen a proliferation of ISPs in Zimbabwe yet there is no information
+                            regarding
+                            currently subscribed user experiences.We are simply giving the internet community a platform
+                            to
+                            give us that data and help all prospective subscribers/customers/users make informed
+                            decisions
                             based on real user data before they commit to any ISP.
                         </li>
                         <li role="separator" class="divider"></li>
@@ -106,11 +110,23 @@
     {% if not current_user.is_authenticated %}
         <div class="aboutus">
             <ul class="list-group">
-                <li class="list-group-item disabled"><h4>Are you a ZOL ,Frampol ,YoAfrica ,Liquid , Utande, Africom,Telco or Telone customer ?</h4></li>
-                <li class="list-group-item">Lets <em>Build</em> a community driven ISP reputation database together by sharing our personal user experiences</li>
-                <li class="list-group-item">Lets <em>Analyse</em> why certain users prefer certain ISPs ? ,How ISP X compare against ISP Y for KPI Z... and other adHoc reports</li>
-                <li class="list-group-item">Lets <em>Report</em> on the analysed data ,How does ISP X fair against KPI Y over time</li>
-                <li class="list-group-item">Lets <em>Empower</em> the internet user community to be judge, jury, and executioner and dictate how the ISPs should respond to the market</li>
+                <li class="list-group-item disabled"><h4>Are you a ZOL ,Frampol ,Liquid , Utande, Africom,Telco ,Zarnet
+                    or Telone customer ? this site aims to </h4></li>
+                <li class="list-group-item"><em>Build</em> a Zimbabwean internet-community-driven ISP reputation
+                    database based on your
+                    personal user experiences reviews
+                </li>
+                <li class="list-group-item"><em>Analyse </em> and manipulate the data sets that you provide and create
+                    visualizations to communicate results.
+                </li>
+                <li class="list-group-item"><em>Report</em> on the analysed data sets and share with the Zimbabwean
+                    internet user community so that whoever needs to draw their own
+                    conclusions can do so
+                </li>
+                <li class="list-group-item"><em>Empower</em> the Zimbabwean internet community to dictate how ISPs
+                    should respond to the market
+                </li>
+                <a href="#" class="list-group-item active"><h4>ISP service predictor calculator </h4></a>
             </ul>
         </div>
     {% endif %}
@@ -135,19 +151,22 @@
                                         <tr>
                                             <td>
                                                 <span class="glyphicon glyphicon-file text-info"></span><a
-                                                    href="{{ url_for('view_my_isp_service_subscriptions') }}">View my Currently Subscribed ISP(s) and Service(s)</a>
+                                                    href="{{ url_for('view_my_isp_service_subscriptions') }}">View my
+                                                Currently Subscribed ISP(s) and Service(s)</a>
                                             </td>
                                         </tr>
-                                         <tr>
+                                        <tr>
                                             <td>
                                                 <span class="glyphicon glyphicon-file text-info"></span><a
-                                                    href="{{ url_for('add_your_subscribed_isp_services') }}">Add ISP(s) and Service(s) that you are using or have used ?</a>
+                                                    href="{{ url_for('add_your_subscribed_isp_services') }}">Add ISP(s)
+                                                and Service(s) that you are using or have used ?</a>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <span class="glyphicon glyphicon-pencil text-primary"></span><a
-                                                    href="{{ url_for('rate_isp') }}">Rate ISP that you have used or currently using</a>
+                                                    href="{{ url_for('rate_isp') }}">Rate ISP that you have used or
+                                                currently using</a>
                                             </td>
                                         </tr>
 

@@ -112,7 +112,7 @@
                             <!-- Button -->
 
                             <div class="col-sm-12 controls">
-                                <a id="btn-login" href="#" class="btn btn-success"  >{{ form.submit }} </a>
+                                <a id="btn-login" href="#" class="btn btn-success">{{ form.submit }} </a>
                                 <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>
 
                             </div>
@@ -144,7 +144,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form id="signupform" class="form-horizontal" role="form">
+                   {# <form id="signupform" class="form-horizontal" role="form">
 
                         <div id="signupalert" style="display:none" class="alert alert-danger">
                             <p>
@@ -204,7 +204,7 @@
                             </div>
                         </div>
 
-                        {#<div style="border-top: 1px solid #999; padding-top:20px" class="form-group">
+                        #}{#<div style="border-top: 1px solid #999; padding-top:20px" class="form-group">
 
                             <div class="col-md-offset-3 col-md-9">
                                 <button id="btn-fbsignup" type="button" class="btn btn-primary">
@@ -212,9 +212,38 @@
                                 </button>
                             </div>
 
-                        </div>#}
+                        </div>#}{#
 
+                    </form>#}
+
+
+                    <form action="{{ url_for('register') }}" method=post class="form-signin">
+
+                        {{ form.csrf_token }}
+                        <h4 class="form-signin-heading">Register</h4>
+
+                        <label for="inputEmail" class="sr-only">Email Address</label>
+                        {% for message in form.email.errors %}
+                            <div class="test">{{ message }}</div>
+                        {% endfor %}
+                        <input type="email" id="inputEmail" name="email" class="form-control"
+                               value="{{ request.form.email }}">
+
+
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        {% for message in form.password.errors %}
+                            <div class="test">{{ message }}</div>
+                        {% endfor %}
+                        <input type="password" id="inputPassword" name="password" class="form-control"
+                               value="{{ request.form.password }}">
+
+                        {{ form.recaptcha }}
+
+
+                        <button class="btn btn-lg btn-primary btn-block">{{ form.submit }}</button>
                     </form>
+
+
                 </div>
             </div>
 

@@ -3,24 +3,28 @@
     <!-- Begin page content -->
 
     <div class="page-header">
-        <h4>Share your personal experiences with your ISP on a scale of (1-5),and we will calculate the health index and reputation of your ISP </h4>
+        <h4>Review your ISP against the KPIs below on a scale of (1-5),and we will calculate the overall Health Index (HI) and
+            Reputation (R) of your ISP </h4>
     </div>
     <div class="row">
         <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
                 <img src="{{ url_for('static', filename = 'img/pricing.png') }}">
+
                 <div class="caption">
                     <h4>Pricing</h4>
-                    <p> On average ,how does your ISP fare ?</p>
+                    <p> On average , is their product pricing fair ?</p>
                 </div>
             </div>
         </div>
         <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
                 <img src="{{ url_for('static', filename = 'img/reliability.png') }}">
+
                 <div class="caption">
                     <h4>Reliability </h4>
-                    <p>Is your service always available when you want to use it ?</p>
+
+                    <p>Is your service always available when you need it ?</p>
                 </div>
             </div>
         </div>
@@ -28,17 +32,21 @@
         <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
                 <img src="{{ url_for('static', filename = 'img/features.png') }}">
+
                 <div class="caption">
                     <h4>Features / Add-Ons</h4>
-                    <p>Are there any extras or incentives ontop of your subscribed package </p>
+
+                    <p>Are there any extras ontop of your subscribed package </p>
                 </div>
             </div>
         </div>
         <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
                 <img src="{{ url_for('static', filename = 'img/portal.png') }}">
+
                 <div class="caption">
                     <h4>Self Service Portals</h4>
+
                     <p>Do they offer chat , payment portals etc at your convinience</p>
                 </div>
             </div>
@@ -46,8 +54,10 @@
         <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
                 <img src="{{ url_for('static', filename = 'img/billing.png') }}">
+
                 <div class="caption">
                     <h4>Billing </h4>
+
                     <p>Do you get consistent bills , are you getting billed accurately.</p>
                 </div>
             </div>
@@ -55,13 +65,38 @@
         <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
                 <img src="{{ url_for('static', filename = 'img/support.png') }}">
+
                 <div class="caption">
                     <h4>Customer/Technical Support</h4>
-                     <p>How responsive and accessible is technical support and customer services</p>
+                    <p>How responsive and accessible is technical support and customer services</p>
                 </div>
             </div>
-      </div>
-
+        </div>
     </div>
+
+    <ul class="list-group">
+    <li class="list-group-item disabled"><h5>Questions and Adhoc reports this app will be able to answer and provide</h5>
+    </li>
+    <li class="list-group-item">Are you a company/organisation looking to subscribe or change to a specific ISP
+        but dont know its Health index and Reputation?
+    </li>
+    <li class="list-group-item">Are you visiting Zimbabwe for the first time and looking for internet that is
+        going to meet your needs while you are here.
+    </li>
+    <li class="list-group-item">Are you an ISP willing to listen to the people ? if you are looking for raw data
+        of the comments made by the internet user community, unfortunately we will provide that data at a fee
+    </li>
+    <li class="list-group-item">Are you an ISP looking to improve your reputation based on the health index
+        provided by the community ,unfortunately we will provide that data at a fee for the people have spoken.
+    </li>
+    <li class="list-group-item">
+    For the ISPs do you want to know why certain users prefer certain ISPs ? ,How ISP X compare against ISP Y for KPI Z
+    </li>
+    <li class="list-group-item">How does ISP X fair against KPI Y over time</li>
+    <li class="list-group-item">ISP of the year or month based on best reputation</li>
+    <li class="list-group-item">Most importantly ,we need your input on the Health index of your ISP using those
+        KPIs above , this will help us answer the questions above
+    </li>
+    </ul>
 
 {% endblock %}

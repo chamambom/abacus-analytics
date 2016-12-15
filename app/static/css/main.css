@@ -218,9 +218,9 @@ em{
 }
 
 .h4, h4, .nav > li {
-    font-size: 15px;
-    font-weight: 500;
-    color: #000;
+    color: #FF851B ;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .h5, h5 {
@@ -230,7 +230,7 @@ em{
 }
 
 .panel-title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > small, .panel-title > small > a {
-    color:  #666 ;
+    color:  #ff851b ;
 }
 
 .form-group {
@@ -306,7 +306,7 @@ th{
 }
 
 .col-sm-4 , .col-lg-4 ,.col-md-4{
-    padding: 2px;
+    padding: 1px;
 
 }
 
@@ -316,12 +316,17 @@ th{
 }
 
 .thumbnail .caption {
-    padding: 2px;
+    padding: 20px;
     color: #365899;
 }
 
-#loginform{
+#loginform ,#signupbox{
     padding: 4px;
 }
 
 
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    background-color: #eee;
+    border-color: #ccc;
+    margin-bottom: 15px;
+  }
