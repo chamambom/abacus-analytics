@@ -31,7 +31,7 @@
       <td><strong>{{ i.kpi_name }}</strong></td>
       <td>{{ i.count_of_users }}</td>
       <td>{{ i.sum_of_ratings }}</td>
-      <td>{{ i.avg_of_ratings|round|int }}</td>
+      <td><strong>{{ i.avg_of_ratings|round|int }}</strong></td>
              {% for m in ratings_table_values %}
                 {% if (m.ratings_value) ==(i.avg_of_ratings|round|int)%}
                      <td><strong>{{ m.ratings_comment}}</strong></td>

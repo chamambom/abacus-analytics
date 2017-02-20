@@ -10,7 +10,7 @@ import pygal
 
 @application.route('/')
 def index():
-    return render_template('home.html')
+     return redirect(url_for('login'))
 
 
 @application.route('/add_your_subscribed_isp_services')
@@ -163,9 +163,8 @@ def view_my_isp_ratings():
     kpi = ([i.kpi_name for i in view_my_isp_ratings])
     ratings_value = ([int(round(i.ratings_value)) for i in view_my_isp_ratings])
 
-
     from pygal.style import DefaultStyle
-    bar_chart = pygal.Bar(range=(0, 5), print_values=True, style=DefaultStyle(
+    bar_chart = pygal.Bar(range=(0, 5), print_values=True,legend_at_bottom=True,legend_box_size=40, style=DefaultStyle(
         value_font_family='googlefont:Raleway',
         label_font_size=18,
         legend_font_size=20,
@@ -178,8 +177,8 @@ def view_my_isp_ratings():
 
     bar_chart.title = "ISP Reputation Scores for KPI "
     bar_chart.x_labels = isps
-    #bar_chart.x_labels = kpi
-    bar_chart.add('R-Score', ratings_value)
+    # bar_chart.x_labels = kpi
+    bar_chart.add('Reputation', ratings_value)
     my_isp_ratings_graph_data = bar_chart.render(is_unicode=True)
 
 
@@ -224,29 +223,29 @@ def view_overall_isp_ratings():
         rating_verdict = [''] + ([i.ratings_comment for i in ratings_table_values])
 
         from pygal.style import DefaultStyle
-        bar_chart = pygal.Bar(range=(0, 5), print_values=True, style=DefaultStyle(
-            value_font_family='googlefont:Raleway',
-            label_font_size=18,
-            legend_font_size=20,
-            tooltip_font_size=20,
-            major_label_font_size=20,
-            value_label_font_size=20,
-            colors=('#ff851b', '#E8537A', '#E95355', '#E87653', '#E89B53'),
-            value_font_size=30,
-            value_colors=('white',)))
+        bar_chart = pygal.Bar(range=(0, 5), print_values=True, legend_at_bottom=True,legend_box_size=40,
+                              style=DefaultStyle(
+                                  value_font_family='googlefont:Raleway',
+                                  label_font_size=18,
+                                  legend_font_size=20,
+                                  tooltip_font_size=20,
+                                  major_label_font_size=20,
+                                  value_label_font_size=20,
+                                  colors=('#ff851b', '#E8537A', '#E95355', '#E87653', '#E89B53'),
+                                  value_font_size=30,
+                                  value_colors=('white',)))
         bar_chart.title = "ISP Reputation Scores for KPI " + kpi[0]
         bar_chart.x_labels = isps
         bar_chart.y_labels = rating_verdict
-        bar_chart.add('R-Score', avg_ratings)
+        bar_chart.add('ISP Reputation', avg_ratings)
         Overall_isp_ratings_graph_data = bar_chart.render(is_unicode=True)
 
         pie_chart = pygal.Pie()
-        pie_chart.title = 'Browser usage in February 2012 (in %)'
-        pie_chart.add('Chrome', 36.3)
-        pie_chart.add('Safari', 4.5)
-        pie_chart.add('Opera', 2.3)
+        pie_chart.title = 'ISP (in %)'
+        pie_chart.add('Zol', 36.3)
+        pie_chart.add('Powertel', 4.5)
+        pie_chart.add('Telco', 2.3)
         Overall_isp_ratings_pie_graph_data = pie_chart.render(is_unicode=True)
-
 
         graph = pygal.Line()
         graph.title = '% Change Coolness of programming languages over time.'
@@ -261,7 +260,7 @@ def view_overall_isp_ratings():
                                view_overall_isp_ratings=view_overall_isp_ratings,
                                ratings_table_values=ratings_table_values, graph_data=graph_data
                                , Overall_isp_ratings_graph_data=Overall_isp_ratings_graph_data
-                               ,Overall_isp_ratings_pie_graph_data=Overall_isp_ratings_pie_graph_data)
+                               , Overall_isp_ratings_pie_graph_data=Overall_isp_ratings_pie_graph_data)
 
 
 @application.route('/rate_service', methods=['GET', 'POST'])
@@ -378,9 +377,8 @@ def register():
             db.session.add(newuser)
             db.session.commit()
             current_user = newuser.email
-
             if current_user:
-                return redirect(url_for('dashboard'))
+                return redirect(url_for('isp_portal'))
     elif request.method == 'GET':
         return render_template('register.html', form=form)
 
@@ -481,6 +479,11 @@ def logout():
     logout_user()
     flash('You have logged out ,thank you for your contribution', 'success')
     return redirect(url_for('login'))
+
+
+@application.route('/martin')
+def martin():
+    return render_template('martin.html')
 
 # Look into the function below and see how you can use it
 
