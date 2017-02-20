@@ -7273,7 +7273,7 @@ h1, h2, h3, h4, h5, h6 {
     color: rgba(255, 255, 255, 0.5);
     background-color: #b04030;
     background-image: url("/static/img/bg.png");
-    margin-bottom: 30px;
+    margin-bottom: 8px;
 }
 
 .page-heading h1 {
@@ -7292,7 +7292,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (min-width: 768px) {
     .page-heading {
-        padding-top: 60px;
+        padding-top: 55px;
         padding-bottom: 8px;
         text-align: left;
         /*font-size: 24px;*/
@@ -8744,25 +8744,22 @@ footer .footer-main {
 
 /*##########################################My Custom Made ######################################################################*/
 .left_pane {
-    /*the border is set to one to see how the UX should work*/
-    border: solid 1px #f2f3f4;
-    width: 28%;
-    padding: 8px;
+    /*border: solid 1px #f2f3f4;*/
+
+    width: 28.8%;
+    padding: 3px;
     float: left;
     height: auto;
     position: relative;
     border-radius: 5px 0px 0px 5px;
     -moz-border-radius: 5px 0px 0px 5px;
     -webkit-border-radius: 5px 0px 0px 5px;
-    /*color: #000;
-    font-weight: 500;*/
 }
 
 .right_pane {
-    /*the border is set to one to see how the UX should work*/
-    border: solid 1px #f2f3f4;
+
     width: 71%;
-    padding: 8px;
+    padding: 3px;
     float: right;
     height: auto;
     position: relative;
@@ -8770,8 +8767,6 @@ footer .footer-main {
     -moz-border-radius: 0px 5px 5px 0px;
     -webkit-border-radius: 0px 5px 5px 0px;
     overflow-x: hidden
-    /*color: #000;
-    font-weight: 500;*/
 }
 
 em {

@@ -10,7 +10,8 @@ import pygal
 
 @application.route('/')
 def index():
-     return redirect(url_for('login'))
+     # return redirect(url_for('login'))
+       return render_template('home.html')
 
 
 @application.route('/add_your_subscribed_isp_services')
@@ -376,9 +377,8 @@ def register():
             mail.send(msg)
             db.session.add(newuser)
             db.session.commit()
-            current_user = newuser.email
             if current_user:
-                return redirect(url_for('isp_portal'))
+                return redirect(url_for('dashboard'))
     elif request.method == 'GET':
         return render_template('register.html', form=form)
 

@@ -100,7 +100,7 @@
                         My Insipiration <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="icon-list"></i> Bootstrap Resources List</a>
+                            <a href="#"><i class="icon-list"></i> How i was inspired</a>
                         </li>
                         <li>
                             <a href="#"><i class="icon-support"></i> Help &amp; FAQ</a>
@@ -116,7 +116,7 @@
                 {% if not current_user.is_authenticated %}
                     <li><a id="loginLink" href="{{ url_for('login') }}" role="button"><i
                             class="fa fa-lock login"></i><span>Login</span></a></li>
-                    <li><a href="{{ url_for('register') }}" role="button"><i class="fa fa-pencil register"></i><span>Signup</span></a>
+                    <li><a href="{{ url_for('register') }}" role="button"><i class="fa fa-pencil register"></i><span>Register</span></a>
                     </li>
                 {% endif %}
                 {% if current_user.is_authenticated %}
@@ -172,11 +172,11 @@
                         <div class="panel-group" id="accordion">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title">
+                                    <h5 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span
                                                 class="glyphicon glyphicon-folder-close">
                             </span>ISP Reviews</a>
-                                    </h4>
+                                    </h5>
                                 </div>
                                 <div id="collapseOne" class="panel-collapse collapse in">
                                     <div class="panel-body">
@@ -247,11 +247,11 @@
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title">
+                                    <h5 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span
                                                 class="glyphicon glyphicon-th">
                             </span>Services Reviews</a>
-                                    </h4>
+                                    </h5>
                                 </div>
                                 <div id="collapseTwo" class="panel-collapse collapse">
                                     <div class="panel-body">
@@ -296,12 +296,12 @@
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title">
+                                    <h5 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion"
                                            href="#collapseThree"><span
                                                 class="glyphicon glyphicon-user">
                             </span>Account</a>
-                                    </h4>
+                                    </h5>
                                 </div>
                                 <div id="collapseThree" class="panel-collapse collapse">
                                     <div class="panel-body">
@@ -336,12 +336,12 @@
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title">
+                                    <h5 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion"
                                            href="#collapseFour"><span
                                                 class="glyphicon glyphicon-file">
                             </span>AdHoc Reports</a>
-                                    </h4>
+                                    </h5>
                                 </div>
                                 <div id="collapseFour" class="panel-collapse collapse">
                                     <div class="panel-body">
