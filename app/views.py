@@ -1,17 +1,27 @@
 from flask import request, redirect, url_for, render_template, flash, render_template_string
 from flask_login import login_required, login_user, logout_user, current_user
 from sqlalchemy import func
+import pygal
+
 from app.forms import SignupForm, LoginForm, MultipleCheckBoxes
 from app.models import User, Services, Service_metric_ratings, Ratings, Kpis, Kpi_ratings, Isps, Service_metric, \
     Isp_service
 from app import application, db, mail, Message
-import pygal
 
 
 @application.route('/')
 def index():
-     # return redirect(url_for('login'))
-       return render_template('home.html')
+    # return redirect(url_for('login'))
+    return render_template('home.html')
+
+
+@application.route('/mystory')
+def mystory():
+    return render_template('mystory.html')
+
+@application.route('/myinspiration')
+def myinspiration():
+    return render_template('myinspiration.html')
 
 
 @application.route('/add_your_subscribed_isp_services')
@@ -165,16 +175,17 @@ def view_my_isp_ratings():
     ratings_value = ([int(round(i.ratings_value)) for i in view_my_isp_ratings])
 
     from pygal.style import DefaultStyle
-    bar_chart = pygal.Bar(range=(0, 5), print_values=True,legend_at_bottom=True,legend_box_size=40, style=DefaultStyle(
-        value_font_family='googlefont:Raleway',
-        label_font_size=18,
-        legend_font_size=20,
-        tooltip_font_size=20,
-        major_label_font_size=20,
-        value_label_font_size=20,
-        colors=('#ff851b', '#E8537A', '#E95355', '#E87653', '#E89B53'),
-        value_font_size=30,
-        value_colors=('white',)))
+    bar_chart = pygal.Bar(range=(0, 5), print_values=True, legend_at_bottom=True, legend_box_size=40,
+                          style=DefaultStyle(
+                              value_font_family='googlefont:Raleway',
+                              label_font_size=18,
+                              legend_font_size=20,
+                              tooltip_font_size=20,
+                              major_label_font_size=20,
+                              value_label_font_size=20,
+                              colors=('#ff851b', '#E8537A', '#E95355', '#E87653', '#E89B53'),
+                              value_font_size=30,
+                              value_colors=('white',)))
 
     bar_chart.title = "ISP Reputation Scores for KPI "
     bar_chart.x_labels = isps
@@ -224,7 +235,7 @@ def view_overall_isp_ratings():
         rating_verdict = [''] + ([i.ratings_comment for i in ratings_table_values])
 
         from pygal.style import DefaultStyle
-        bar_chart = pygal.Bar(range=(0, 5), print_values=True, legend_at_bottom=True,legend_box_size=40,
+        bar_chart = pygal.Bar(range=(0, 5), print_values=True, legend_at_bottom=True, legend_box_size=40,
                               style=DefaultStyle(
                                   value_font_family='googlefont:Raleway',
                                   label_font_size=18,

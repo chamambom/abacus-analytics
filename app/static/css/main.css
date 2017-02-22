@@ -7401,7 +7401,8 @@ section.page p:last-child {
 }
 
 .well {
-    background-color: #f5f5f5;
+    background-color: #fff !important;
+    color: #666;
     border-radius: 4px;
     border: none;
     border-bottom: 3px solid #eeeeee;
@@ -8655,7 +8656,7 @@ article.post .pager li a {
 footer .footer-mailchimp {
     color: white;
     background-color: #b04030;
-    padding: 50px 0;
+    padding: 15px 0;
     background-image: url("/static/img/bg.png");
 }
 
@@ -8687,7 +8688,7 @@ footer .footer-mailchimp .input-group .input-group-btn .btn {
 }
 
 footer .footer-social {
-    margin-top: 50px;
+    margin-top: 15px;
     margin-bottom: 0;
 }
 
@@ -8739,7 +8740,7 @@ footer .footer-social ul.list-inline li.social-google-plus a:hover {
 
 footer .footer-main {
     text-align: center;
-    padding: 50px 0;
+    padding: 15px 0;
 }
 
 /*##########################################My Custom Made ######################################################################*/

@@ -94,13 +94,13 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="#">My Story</a></li>
+                <li><a href="{{ url_for('mystory') }}">My Story</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Bootstrap Related Resources">
                         My Insipiration <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="icon-list"></i> How i was inspired</a>
+                            <a href="{{ url_for('myinspiration') }}"><i class="icon-list"></i> My Inspiration</a>
                         </li>
                         <li>
                             <a href="#"><i class="icon-support"></i> Help &amp; FAQ</a>
@@ -152,13 +152,16 @@
         <div class="left_pane">
             {% if not current_user.is_authenticated %}
                 <ul class="list-group">
-                    <li class="list-group-item disabled"><h5>This site aims to</h5></li>
-                    <li class="list-group-item"><em>Create</em> visibility into each ISP's QOS
-                        offering by building a central Zimbabwean user driven ISP reputation
-                        database based on personal user experience reviews
+                    <li class="list-group-item disabled"><h5>This app aims to</h5></li>
+                    <li class="list-group-item"><em>Build</em> a user driven ISP reputation database based on personal
+                        user experience reviews on the following KPIs <em>[Pricing,Reliability,
+                            Self Service Portals, Billing and
+                            Customer/Technical Support]</em>
                     </li>
-                    <li class="list-group-item">Based on your QOS reviews <em>Assist</em> prospective ISP customers in
-                        selecting the best ISP without being blind sided by marketing .
+                    <li class="list-group-item"><em>Create</em> visibility and insight into the <em>QOS</em> offered by
+                        Zimbabwean ISP's so as to assist prospective/transient ISP customers when making a choice on
+                        which ISP to
+                        subscribe to.
                     </li>
                     <li class="list-group-item">
                         <a href="#"><h5>ISP service predictor calculator </h5></a>
@@ -381,7 +384,7 @@
             {% endif %}
         </div>
         <div class="right_pane">
-        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
                     <ul class="flashes">
                         {% for category, message in messages %}
@@ -394,13 +397,6 @@
                 {% endif %}
             {% endwith %}
             {% block body %} {% endblock %}
-
-
-
-            {#<script async type="text/javascript"
-                src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=startbootstrapcom"
-                id="_carbonads_js">
-        </script>#}
         </div>
     </div>
     {#closing the container div#}
@@ -411,136 +407,43 @@
             <div class="overview-panel">
                 <ul class="list-group">
                     <li class="list-group-item disabled">
-                        <h5>If you are an ISP ,Researcher ,Subscriber or Regulator - You will have access to the
-                            following
-                            reports</h5>
+                        <h5>What this app will be able to do for you</h5>
                     </li>
-                    <li class="list-group-item">ISP KPI Health index (HI) and Calculated Reputation(R) based on supplied
-                        values
+                    <li class="list-group-item">Help companies/organisations looking to subscribe or change ISPs
                     </li>
-                    <li class="list-group-item">If you are a company/organisation looking to subscribe or change to a
-                        specific ISP
-                    </li>
-                    <li class="list-group-item">If you are you an ISP and would love to know what your subscribers are
-                        saying?
-                    </li>
-                    <li class="list-group-item">If you are you an ISP looking to improve your reputation based on the
-                        health index
-                        provided by the Zimbabwean internet user community.
-                    </li>
-                    <li class="list-group-item">If you are you an ISP wondering why certain users prefer certain ISPs ?
-                    </li>
-                    <li class="list-group-item">If you want to know how ISP X compare against ISP Y for KPI Z</li>
                     <li class="list-group-item">If you are visiting Zimbabwe for the first time and looking for an ISP
-                        to subscriber to.
+                        that suits your needs
                     </li>
-                    <li class="list-group-item">How does ISP X fair against KPI Y over time</li>
-                    <li class="list-group-item">ISP of the week, month ,year based on best reputation</li>
+                    <li class="list-group-item">Help ISPs gain access to a centralised customer experience database</li>
+                    <li class="list-group-item">Determine ISP of the week, month ,year based on reputation</li>
                 </ul>
-
-                <li class="list-group-item">
-                    <a href="#"><strong>NB - You may realise that via the site some reports have been omitted.Reports
-                        accessible via the
-                        site are mainly
-                        for
-                        aiding an individual subscriber or the community evaluate the best ISP based on the Health Index
-                        [HI] and
-                        Reputation [R] before subscribing to his ISP of choice.Other general reports will provide
-                        insight into other
-                        ISPs.
-                        However all reports are accessible via Splunk at a fee and would recommend ISPs ,Reseachers and
-                        Regulators
-                        to go for this option which will provide unlimited access to All reports at 5 dollars per month
-                    </strong></a>
+                <li class="list-group-item disabled">
+                    Some granular reports will only be accessible via Splunk.If you are a Researcher or an ISP administrator
+                    looking for raw data that you can transform yourself ,then this option is for you.Access to reports
+                    via Splunk is at a fee of $5 dollars per year [This is to ensure that the site keeps running]
                 </li>
-
-
-            </div>
-            <div class="well">
-                <h5>Technologies Used</h5>
-                Technologies used in this project -Python, Flask ,Flask-SQLAlchemy for the backend
-                ,PyGAL for graphing ,vue.js and Jquery for the front end and Splunk for Visualisation
-                <h5>My Insipiration</h5>
-                As a Linux engineer i have been fortunate to work with Splunk ,a machine learning tool that can
-                transpose
-                any data given to it and make it useful.Then came a realisation that the Zimbabwean community is in
-                need of applications that gather raw data from people and automatically create predictive models based
-                on that
-                data.
-                This site is about one area of Data science called data analytics (Trending, Predictive, Comparative)
-                in the ISP industry.Our job is to collect data from ISP customers and analyse that data
-                with the purpose of drawing conclusions about that information.
-
-                What is Data Science and how is it different from statistics and analytics?
-                it spans fields like computer science, modeling, statistics, analytics, and mathematics.
-                At its core, data science
-                involves using automated methods to analyze massive amounts of data and to extract knowledge
-                from them.
-
-                By combining aspects of statistics, computer science, applied mathematics, and visualization,
-                data science can turn the vast amounts of data the digital age generates into new insights and new
-                knowledge.
-                </p>
             </div>
         </div>
         <div class="col-md-5">
-            <div class="well">
-                <h5>My Story</h5>
-
-                <p>
-                    Over time we have seen a proliferation of ISPs in Zimbabwe offering a wide range of services.While
-                    the Zimbabwean user community is spoilt for choice ,the QOS offered by these various ISPs differ
-                    and you that information is only accessible after you have subscribed and commited to that ISP.
-                </p>
-
-                <p>
-                    BL Analytics aims to bridge that gap through the Zimbabwean user community by creating
-                    a central ISP reputation database ,a result of each individual sharing their personal experiences
-                    using
-                    our defined baseline KPIs.
-                </p>
-
-                <p>Together We will create a community driven Reputation database which will enable us to benchmark
-                    ISP health Index based on the defined baseline KPIs and guide prospective subscribers in
-                    making informed decisions before they commit to any ISP.
-                </p>
-
-                <p>
-                    In summary we aim to create a unit of purpose for Zimbabwean ISPs, establish and maintain
-                    best of breed practices, and ultimately try to improve their service offerings in the process aiding
-                    the subscribers to use facts when deciding which service to buy and not be blinded by marketing
-                </p>
-
-            </div>
-            <div class="well">
-                <h5>Advertise Here Specs(250 X 150)px </h5>
-
-                <p>
-                    Dummy text is text that is used in the publishing industry or by web designers to occupy the space
-                    which will later be filled with 'real' content. This is required when, for example, the final text
-                    is not yet available. Dummy text is also known as 'fill text'. It is said that song composers of the
-                    past used dummy texts as lyrics when writing melodies in order to have a 'ready-made' text to sing
-                    with the melody. Dummy texts have been in use by typesetters since the 16th century.
-                </p>
-            </div>
-            <div class="well">
-                <h5>Advertise Here Specs(250 X 150)px </h5>
-
-                <p>
-                    Dummy text is text that is used in the publishing industry or by web designers to occupy the space
-                    which will later be filled with 'real' content. This is required when, for example, the final text
-                    is not yet available. Dummy text is also known as 'fill text'. It is said that song composers of the
-                    past used dummy texts as lyrics when writing melodies in order to have a 'ready-made' text to sing
-                    with the melody. Dummy texts have been in use by typesetters since the 16th century.
-                </p>
-            </div>
+            <ul class="list-group">
+                <li class="list-group-item disabled">
+                    <h5>This app will help you answer questions like </h5>
+                </li>
+                <li class="list-group-item">why certain users prefer certain ISPs ?
+                </li>
+                <li class="list-group-item">How does ISP X compare against ISP Y for KPI Z
+                </li>
+                <li class="list-group-item">How does ISP X fair against KPI Y over time</li>
+                <li class="list-group-item">How does ISP X compare against ISP Y for KPI Z</li>
+            </ul>
         </div>
     </div>
 </div>
+
 <footer>
     <div class="footer-mailchimp">
         <div class="container text-center">
-            <h2>Want more Insight into how ISPs are perfoming</h2>
+            <h3>Want more Insight into how ISPs are perfoming</h3>
             <h4>Subscribe to our mailing list to receive constant updates!</h4>
 
             <div id="mc_embed_signup">
@@ -568,16 +471,16 @@
         <div class="container text-center">
             <ul class="list-inline">
                 <li class="social-github">
-                    <a href="https://github.com/blackrockdigital"><i class="fa fa-github"></i></a>
+                    <a href="#"><i class="fa fa-github"></i></a>
                 </li>
                 <li class="social-twitter">
-                    <a href="https://twitter.com/sbootstrap"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
                 </li>
                 <li class="social-facebook">
-                    <a href="https://www.facebook.com/StartBootstrap/"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
                 </li>
                 <li class="social-google-plus">
-                    <a href="https://plus.google.com/+Startbootstrap"><i class="fa fa-google-plus"></i></a>
+                    <a href="#"><i class="fa fa-google-plus"></i></a>
                 </li>
             </ul>
         </div>
