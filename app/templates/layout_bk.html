@@ -396,7 +396,6 @@
                     </ul>
                 {% endif %}
             {% endwith %}
-
             {% block body %} {% endblock %}
         </div>
     </div>
@@ -405,32 +404,69 @@
 <div class="container">
     <div class="row">
         <div class="col-md-7">
+            <div class="overview-panel">
                 <ul class="list-group">
                     <li class="list-group-item disabled">
-                        <h5>What this website will be able to do for you</h5>
+                        <h5>What this app will be able to do for you</h5>
                     </li>
-                        <li class="list-group-item">x</li>
-                 <li class="list-group-item">y</li>
-
-
+                    <li class="list-group-item">Help companies/organisations looking to subscribe or change ISPs
+                    </li>
+                    <li class="list-group-item">If you are visiting Zimbabwe for the first time and looking for an ISP
+                        that suits your needs
+                    </li>
+                    <li class="list-group-item">Help ISPs gain access to a centralised customer experience database</li>
+                    <li class="list-group-item">Determine ISP of the week, month ,year based on reputation</li>
                 </ul>
-
-
+                <li class="list-group-item disabled">
+                    Some granular reports will only be accessible via Splunk.If you are a Researcher or an ISP administrator
+                    looking for raw data that you can transform yourself ,then this option is for you.Access to reports
+                    via Splunk is at a fee of $5 dollars per year [This is to ensure that the site keeps running]
+                </li>
+            </div>
         </div>
         <div class="col-md-5">
             <ul class="list-group">
                 <li class="list-group-item disabled">
-                    <h5>This website will help you answer questions like </h5>
+                    <h5>This app will help you answer questions like </h5>
                 </li>
-                <li class="list-group-item">z</li>
-                 <li class="list-group-item">w</li>
-
+                <li class="list-group-item">why certain users prefer certain ISPs ?
+                </li>
+                <li class="list-group-item">How does ISP X compare against ISP Y for KPI Z
+                </li>
+                <li class="list-group-item">How does ISP X fair against KPI Y over time</li>
+                <li class="list-group-item">How does ISP X compare against ISP Y for KPI Z</li>
             </ul>
         </div>
     </div>
 </div>
 
 <footer>
+    <div class="footer-mailchimp">
+        <div class="container text-center">
+            <h3>Want more Insight into how ISPs are perfoming</h3>
+            <h4>Subscribe to our mailing list to receive constant updates!</h4>
+
+            <div id="mc_embed_signup">
+                <form role="form"
+                      action="https://startbootstrap.us3.list-manage.com/subscribe/post?u=531af730d8629808bd96cf489&amp;id=afb284632f"
+                      method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank"
+                      novalidate>
+                    <div class="input-group input-group-lg">
+                        <input type="email" name="EMAIL" class="form-control" id="mce-EMAIL"
+                               placeholder="Email address...">
+<span class="input-group-btn">
+<button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default">Subscribe!</button>
+</span>
+                    </div>
+                    <div id="mce-responses">
+                        <div class="response" id="mce-error-response" style="display:none"></div>
+                        <div class="response" id="mce-success-response" style="display:none"></div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
     <div class="footer-social">
         <div class="container text-center">
             <ul class="list-inline">
@@ -451,7 +487,7 @@
     </div>
     <div class="footer-main">
         <div class="container">
-            <a href="/">BL Analytics</a> is a Data analytics project created and maintained by <a href="#">Martin
+            <a href="/">BL Analytics</a> is a Data science (Analytics) project created and maintained by <a href="#">Martin
             Chamambo</a> at
             <a href="#">AfroInnovations</a>
         </div>

@@ -19,6 +19,7 @@ def index():
 def mystory():
     return render_template('mystory.html')
 
+
 @application.route('/myinspiration')
 def myinspiration():
     return render_template('myinspiration.html')
@@ -202,7 +203,6 @@ def view_my_isp_ratings():
 
 
 @application.route('/view_overall_isp_ratings', methods=['GET', 'POST'])
-@login_required
 def view_overall_isp_ratings():
     if request.method == 'GET':
         return render_template('query_isp_ratings.html')
@@ -429,7 +429,7 @@ def user_count():
     return dict(user_count_registered=user_count_registered, user_count_active=user_count_active)
 
 
-# Below i will need to improvise on the SQL statements for perfomance
+# Below code needs to be improved , need to improvise on the SQL statements for perfomance
 @application.context_processor
 def dropdown():
     try:
