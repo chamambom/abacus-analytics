@@ -300,19 +300,23 @@ def view_global_reports():
     kpi = ([i.kpi_name for i in all_isp_ratings])
     rating_verdict = [''] + ([i.ratings_comment for i in ratings_table_values])
 
-    from pygal.style import DarkSolarizedStyle
+    from pygal.style import LightSolarizedStyle
     bar_chart = pygal.Bar(range=(0, 4), print_values=True, legend_at_bottom=True, legend_box_size=30,
-                          style=DarkSolarizedStyle(
+                          style=LightSolarizedStyle(
                               value_font_family='googlefont:Raleway',
                               label_font_size=20,
+                              background='#eee',
+                              foreground='#b04030',
+                              foreground_strong='#b04030',
+                              foreground_subtle='#000',
                               legend_font_size=20,
                               tooltip_font_size=20,
                               major_label_font_size=20,
                               value_label_font_size=20,
-                              colors=('#b04030', '#b04030', '#b04030', '#b04030', '#b04030'),
+                              colors=('#ff851b', '#b04030', '#b04030', '#b04030', '#b04030'),
                               value_font_size=20,
                               value_colors=('white',)))
-    bar_chart.title = "ISP Reputation Scores for KPI " + kpi[0]
+    bar_chart.title = "ISP Reputation Scores for the "  + kpi[0] + " KPI "
     bar_chart.x_labels = isps
     bar_chart.y_labels = rating_verdict
     bar_chart.add('ISP Reputation', avg_ratings)
