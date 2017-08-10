@@ -275,6 +275,54 @@ def view_overall_isp_ratings():
                                , Overall_isp_ratings_pie_graph_data=Overall_isp_ratings_pie_graph_data)
 
 
+@application.context_processor
+def view_global_reports():
+    all_isp_ratings = db.session.query(func.count(Ratings.ratings_value).label('count_of_users'),
+                                       func.sum(Ratings.ratings_value).label('sum_of_ratings'),
+                                       func.avg(Ratings.ratings_value).label('avg_of_ratings'),
+                                       Isps.isp_name, Kpis.kpi_name) \
+        .filter(Kpi_ratings.isp_id == Isps.isp_id) \
+        .filter(Kpi_ratings.ratings_value == Ratings.ratings_value) \
+        .filter(Kpi_ratings.kpi_id == Kpis.kpi_id) \
+        .filter(Kpi_ratings.user_id == User.user_id) \
+        .filter(Kpis.kpi_name == 'Billing') \
+        .group_by(Isps.isp_name)
+
+    ratings_table_values = db.session.query(Ratings.ratings_value, Ratings.ratings_comment)
+    # for i in view_overall_isp_ratings:
+    # print(i.isp_name, i.service_name, i.metric_name, (round(i.avg_of_ratings)))
+    # ratings_table_values = Ratings.query.filter_by(rating_value=(round(i.avg_of_ratings)))
+
+
+    # below is the charting
+    avg_ratings = ([int(round(i.avg_of_ratings)) for i in all_isp_ratings])
+    isps = ([i.isp_name for i in all_isp_ratings])
+    kpi = ([i.kpi_name for i in all_isp_ratings])
+    rating_verdict = [''] + ([i.ratings_comment for i in ratings_table_values])
+
+    from pygal.style import DarkSolarizedStyle
+    bar_chart = pygal.Bar(range=(0, 4), print_values=True, legend_at_bottom=True, legend_box_size=30,
+                          style=DarkSolarizedStyle(
+                              value_font_family='googlefont:Raleway',
+                              label_font_size=20,
+                              legend_font_size=20,
+                              tooltip_font_size=20,
+                              major_label_font_size=20,
+                              value_label_font_size=20,
+                              colors=('#b04030', '#b04030', '#b04030', '#b04030', '#b04030'),
+                              value_font_size=20,
+                              value_colors=('white',)))
+    bar_chart.title = "ISP Reputation Scores for KPI " + kpi[0]
+    bar_chart.x_labels = isps
+    bar_chart.y_labels = rating_verdict
+    bar_chart.add('ISP Reputation', avg_ratings)
+    Overall_isp_ratings_graph_data = bar_chart.render(is_unicode=True)
+
+    return dict(all_isp_ratings=all_isp_ratings,
+                ratings_table_values=ratings_table_values,
+                Overall_isp_ratings_graph_data=Overall_isp_ratings_graph_data)
+
+
 @application.route('/rate_service', methods=['GET', 'POST'])
 @login_required
 def rate_service():
