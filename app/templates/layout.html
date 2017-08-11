@@ -404,14 +404,12 @@
 </header>
 <div class="container">
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-6">
             <ul class="list-group">
                 <li class="list-group-item disabled">
-                    <h5>Various ISP reputation scores on the <strong>{{ kpi_name }}</strong> KPI </h5>
+                    <h5> Click below for some </h5>
                 </li>
                 <li class="list-group-item">
-
-
                     {#
 
    <ul class="list-group">
@@ -423,6 +421,22 @@
    </ul>
 #}
 
+                    c
+
+
+
+                </li>
+            </ul>
+
+
+        </div>
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li class="list-group-item disabled">
+                    <h5>Various ISP reputation scores on the <strong>{{ kpi_name }}</strong> KPI</h5>
+                </li>
+
+                <li class="list-group-item">
                     <table class="table table-condensed table-bordered  table-hover">
                         <thead class="thead-custom">
                         <tr>
@@ -456,20 +470,8 @@
                         </tbody>
                     </table>
 
-                    {{ Overall_isp_ratings_graph_data|safe }}
-
                 </li>
-            </ul>
-
-
-        </div>
-        <div class="col-md-5">
-            <ul class="list-group">
-                <li class="list-group-item disabled">
-                    <h5>This website will help you answer questions like </h5>
-                </li>
-                <li class="list-group-item">z</li>
-                <li class="list-group-item">w</li>
+             <li class="list-group-item">{{ Overall_isp_ratings_graph_data|safe }}</li>
 
             </ul>
         </div>
