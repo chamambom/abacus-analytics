@@ -131,7 +131,13 @@
                             class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="icon-pencil fa-fw"></i>Credit Bureau</a>
+                            <a href="#"><i class="icon-pencil fa-fw"></i>Zim Credit Bureau</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="icon-pencil fa-fw"></i>Zim visit and travel </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="icon-pencil fa-fw"></i>Zim Institutions Service Delivery Index</a>
                         </li>
                         <li>
                             <a href="#"><i class="icon-handbag fa-fw"></i>
@@ -163,9 +169,7 @@
                         which ISP to
                         subscribe to.
                     </li>
-                    <li class="list-group-item">
-                        <a href="#"><h5>ISP service predictor calculator </h5></a>
-                    </li>
+
                 </ul>
             {% endif %}
             {% if current_user.is_authenticated %}
@@ -407,28 +411,16 @@
         <div class="col-md-6">
             <ul class="list-group">
                 <li class="list-group-item disabled">
-                    <h5> Click below for some </h5>
+                    <h5>Subscribe to the right service and ISP using this calculator</h5>
                 </li>
-                <li class="list-group-item">
-                    {#
-
-   <ul class="list-group">
-    <li class="list-group-item list-group-item-info">
-        <strong>{{count_of_users_who_rated }}</strong>
-         subscriber(s) have shared their QOS experiences for this ISP using the scale below and the average QOS score for this service is
-        <strong>{{average_isp__service_ratings}}</strong>
-    </li>
-   </ul>
-#}
-
-                    c
-
-
-
-                </li>
+                <li class="list-group-item">a</li>
             </ul>
-
-
+             <ul class="list-group">
+                <li class="list-group-item disabled">
+                    <h5>ISP Reputation predictions based on current data</h5>
+                </li>
+                <li class="list-group-item">b</li>
+            </ul>
         </div>
         <div class="col-md-6">
             <ul class="list-group">
@@ -471,7 +463,7 @@
                     </table>
 
                 </li>
-             <li class="list-group-item">{{ Overall_isp_ratings_graph_data|safe }}</li>
+                <li class="list-group-item">{{ Overall_isp_ratings_graph_data|safe }}</li>
 
             </ul>
         </div>

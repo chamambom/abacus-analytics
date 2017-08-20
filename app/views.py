@@ -285,7 +285,7 @@ def view_global_reports():
         .filter(Kpi_ratings.ratings_value == Ratings.ratings_value) \
         .filter(Kpi_ratings.kpi_id == Kpis.kpi_id) \
         .filter(Kpi_ratings.user_id == User.user_id) \
-        .filter(Kpis.kpi_name == 'Billing') \
+        .filter(Kpis.kpi_name == 'Pricing') \
         .group_by(Isps.isp_name)
 
     ratings_table_values = db.session.query(Ratings.ratings_value, Ratings.ratings_comment)
@@ -300,15 +300,15 @@ def view_global_reports():
     kpi = ([i.kpi_name for i in all_isp_ratings])
     rating_verdict = [''] + ([i.ratings_comment for i in ratings_table_values])
 
-    from pygal.style import BlueStyle
+    from pygal.style import DarkGreenBlueStyle
     bar_chart = pygal.Bar(range=(0, 4), print_values=True, human_readable=True, legend_at_bottom=True,width=1000,
-                              style=BlueStyle(
+                              style=DarkGreenBlueStyle(
                               value_font_family='googlefont:Raleway',
                               label_font_size=20,
                               background='#eee',
                               foreground='#000',
                               foreground_strong='#000',
-                              foreground_subtle='#000',
+                              foreground_subtle='#fff',
                               legend_font_size=20,
                               tooltip_font_size=20,
                               major_label_font_size=30,
@@ -316,7 +316,7 @@ def view_global_reports():
                               colors=('#ff851b', '#b04030', '#b04030', '#b04030', '#b04030'),
                               value_font_size=20,
                               value_colors=('white',)))
-    bar_chart.title = "ISP Reputation Scores for the " + kpi[0] + " KPI "
+    bar_chart.title = "ISP Reputation Scores for KPI=" + kpi[0]
     bar_chart.x_labels = isps
     bar_chart.y_labels = rating_verdict
     bar_chart.add('ISP Reputation', avg_ratings)
